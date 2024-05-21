@@ -76,6 +76,10 @@ nlu:
     - Je veux commander de la nourriture
     - Puis-je avoir de la nourriture, s'il vous plaît
     - Commandons de la nourriture
+    - je veux de la nourriture
+    - nourriture
+    - Je prendrais de la nourriture
+    - y a t-il de la nourriture?
 
 - intent: inform_food
   examples: |
