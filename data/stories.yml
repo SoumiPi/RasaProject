@@ -28,6 +28,13 @@ stories:
     - intent: affirmation
     - action: utter_affirmation
 
+- story: order my pizza
+  steps:
+  - intent: order_food
+  - action: action_order_food
+  - intent: inform_food
+  - action: action_confirm_order
+
 
 
 # stories:

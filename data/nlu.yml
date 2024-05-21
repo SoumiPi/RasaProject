@@ -56,6 +56,35 @@ nlu:
     - es-tu un robot?
     - Avec qui je parle?
 
+- intent: thanks
+  examples: |
+    - merci
+    - merci beaucoup
+    - je vous remercie
+    - merci infiniment
+
+- intent: order_pizza
+  examples: |
+    - Je veux commander une [pizza](food)
+    - Puis-je avoir une [pizza](food)
+    - J'aimerais avoir une [pizza](food)
+    - Commandons une [pizza](food)
+    - Que diriez-vous d'une [pizza](food)
+
+- intent: order_food
+  examples: |
+    - Je veux commander de la nourriture
+    - Puis-je avoir de la nourriture, s'il vous plaît
+    - Commandons de la nourriture
+
+- intent: inform_food
+  examples: |
+    - [steak](food)
+    - [burger](food)
+    - [sushi](food)
+    - [salade](food)
+    - [pâtes](food)
+
 # nlu:
 # - intent: greet
 #   examples: |
