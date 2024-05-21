@@ -1,0 +1,76 @@
+version: "3.1"
+
+
+intents:
+  - salutations
+  - au_revoir
+  - affirmation
+  - denie
+  - je_suis_robot
+  - joyeux_salutations
+
+responses:
+  utter_salutations:
+    - text: "Hey! Comment allez-vous?"
+
+  utter_au_revoir:
+    - text: "Au revoir!"
+
+  utter_affirmation:
+    - text: "Bien donc!"
+
+  utter_je_suis_robot:
+    - text: "Je suis un robot, développé par Rasa."
+
+  utter_denie:
+    - text: "D'accord, si vous avez d'autres suggestions?"
+
+  utter_joyeux_salutations:
+    - text: "Super alors, que puis-je faire pour vous?"
+
+session_config:
+  session_expiration_time: 60
+  carry_over_slots_to_new_session: true
+
+
+
+
+# intents:
+#   - greet
+#   - goodbye
+#   - affirm
+#   - deny
+#   - mood_great
+#   - mood_unhappy
+#   - bot_challenge
+#   - order_pizza
+
+# entities:
+#   - food
+
+# responses:
+#   utter_greet:
+#   - text: "Hey! How are you?"
+
+#   utter_cheer_up:
+#   - text: "Here is something to cheer you up:"
+#     image: "https://i.imgur.com/nGF1K8f.jpg"
+
+#   utter_did_that_help:
+#   - text: "Did that help you?"
+
+#   utter_happy:
+#   - text: "Great, carry on!"
+
+#   utter_goodbye:
+#   - text: "Bye"
+
+#   utter_iamabot:
+#   - text: "I am a bot, powered by Rasa. je suis un robot"
+
+#   utter_order_pizza:
+#   - text: "Sure, which kind of pizza would want?"
+
+# session_config:
+#   session_expiration_time: 60
+#   carry_over_slots_to_new_session: true

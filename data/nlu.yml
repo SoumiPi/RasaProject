@@ -1,0 +1,157 @@
+version: "3.1"
+
+nlu:
+- intent: salutations
+  examples: |
+    - hey
+    - Salut
+    - Salut ici
+    - Bonjour
+    - Bonsoir
+    - hey ici
+    - Allons
+
+- intent: joyeux_salutations
+  examples: |
+    - je vais bien
+    - Super!
+    - bien
+    - Très bien
+    - Tout va bien
+
+- intent: au_revoir
+  examples: |
+    - Au revoir
+    - A bientôt
+    - A plus
+    - A plus tard
+    - Bonne journée
+    - bye bye
+
+- intent: affirmation
+  examples: |
+    - Oui
+    - O
+    - indeed
+    - Bien sûr!
+    - Super!
+    - correct
+
+- intent: denie
+  examples: |
+    - non
+    - n
+    - Jamais
+    - Je ne crois pas
+    - Je ne pense pas
+    - Cela ne me plaît pas
+    - Aucunement
+    - Pas vraiment
+
+- intent: je_suis_robot
+  examples: |
+    - qui es-tu?
+    - présente toi
+    - je parle avec qui
+    - es-tu un robot?
+    - Avec qui je parle?
+
+# nlu:
+# - intent: greet
+#   examples: |
+#     - hey
+#     - hello
+#     - hi
+#     - hello there
+#     - good morning
+#     - good evening
+#     - moin
+#     - hey there
+#     - let's go
+#     - hey dude
+#     - goodmorning
+#     - goodevening
+#     - good afternoon
+
+# - intent: goodbye
+#   examples: |
+#     - cu
+#     - good by
+#     - cee you later
+#     - good night
+#     - bye
+#     - goodbye
+#     - have a nice day
+#     - see you around
+#     - bye bye
+#     - see you later
+
+# - intent: affirm
+#   examples: |
+#     - yes
+#     - y
+#     - indeed
+#     - of course
+#     - that sounds good
+#     - correct
+
+# - intent: deny
+#   examples: |
+#     - no
+#     - n
+#     - never
+#     - I don't think so
+#     - don't like that
+#     - no way
+#     - not really
+
+# - intent: mood_great
+#   examples: |
+#     - perfect
+#     - great
+#     - amazing
+#     - feeling like a king
+#     - wonderful
+#     - I am feeling very good
+#     - I am great
+#     - I am amazing
+#     - I am going to save the world
+#     - super stoked
+#     - extremely good
+#     - so so perfect
+#     - so good
+#     - so perfect
+
+# - intent: mood_unhappy
+#   examples: |
+#     - my day was horrible
+#     - I am sad
+#     - I don't feel very well
+#     - I am disappointed
+#     - super sad
+#     - I'm so sad
+#     - sad
+#     - very sad
+#     - unhappy
+#     - not good
+#     - not very good
+#     - extremly sad
+#     - so saad
+#     - so sad
+
+# - intent: bot_challenge
+#   examples: |
+#     - are you a bot?
+#     - are you a human?
+#     - am I talking to a bot?
+#     - am I talking to a human?
+
+
+# - intent: order_pizza
+#   examples: |
+#     - I want to order a [pizza](food)
+#     - Can I get a [pizza](food)
+#     - I'd like to have a [pizza](food)
+#     - Let's order a [pizza](food)
+#     - How about a [pizza](food)
+

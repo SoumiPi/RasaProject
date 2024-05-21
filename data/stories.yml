@@ -1,0 +1,65 @@
+version: "3.1"
+
+stories:
+- story: faire des salutations
+  steps:
+    - intent: salutations
+    - action: utter_salutations
+    - intent: joyeux_salutations
+    - action: utter_joyeux_salutations
+
+- story: se dire au revoir
+  steps:
+    - intent: au_revoir
+    - action: utter_au_revoir
+
+- story: savoir s'il s'agit d'un robot
+  steps:
+    - intent: je_suis_robot
+    - action: utter_je_suis_robot
+
+- story: faire le denie
+  steps:
+    - intent: denie
+    - action: utter_denie
+
+- story: faire une affirmation
+  steps:
+    - intent: affirmation
+    - action: utter_affirmation
+
+
+
+# stories:
+
+# - story: happy path
+#   steps:
+#   - intent: greet
+#   - action: utter_greet
+#   - intent: mood_great
+#   - action: utter_happy
+
+# - story: sad path 1
+#   steps:
+#   - intent: greet
+#   - action: utter_greet
+#   - intent: mood_unhappy
+#   - action: utter_cheer_up
+#   - action: utter_did_that_help
+#   - intent: affirm
+#   - action: utter_happy
+
+# - story: sad path 2
+#   steps:
+#   - intent: greet
+#   - action: utter_greet
+#   - intent: mood_unhappy
+#   - action: utter_cheer_up
+#   - action: utter_did_that_help
+#   - intent: deny
+#   - action: utter_goodbye
+
+# - story: order pizza
+#   steps:
+#   - intent: order_pizza
+#   - action: utter_order_pizza
