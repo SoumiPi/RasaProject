@@ -65,11 +65,11 @@ nlu:
 
 - intent: order_pizza
   examples: |
-    - Je veux commander une [pizza](food)
-    - Puis-je avoir une [pizza](food)
-    - J'aimerais avoir une [pizza](food)
-    - Commandons une [pizza](food)
-    - Que diriez-vous d'une [pizza](food)
+    - Je veux commander une [pizza](nouriture)
+    - Puis-je avoir une [pizza](nouriture)
+    - J'aimerais avoir une [pizza](nouriture)
+    - Commandons une [pizza](nouriture)
+    - Que diriez-vous d'une [pizza](nouriture)
 
 - intent: order_food
   examples: |
@@ -79,11 +79,11 @@ nlu:
 
 - intent: inform_food
   examples: |
-    - [steak](food)
-    - [burger](food)
-    - [sushi](food)
-    - [salade](food)
-    - [pâtes](food)
+    - [steak](nouriture)
+    - [burger](nouriture)
+    - [sushi](nouriture)
+    - [salade](nouriture)
+    - [pâtes](nouriture)
 
 # nlu:
 # - intent: greet

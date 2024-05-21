@@ -8,6 +8,12 @@ intents:
   - denie
   - je_suis_robot
   - joyeux_salutations
+  - order_pizza
+  - order_food
+  - inform_food
+
+entities:
+  - nouriture
 
 responses:
   utter_salutations:
@@ -27,6 +33,11 @@ responses:
 
   utter_joyeux_salutations:
     - text: "Super alors, que puis-je faire pour vous?"
+
+actions:
+  - action_extract_food_entity
+  - action_order_food
+  - action_confirm_order
 
 session_config:
   session_expiration_time: 60

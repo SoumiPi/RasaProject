@@ -1,0 +1,21 @@
+{
+  "lookup": {
+    "eJyLrq6NBQAEOAGx": "action_listen",
+    "eJyLrq7VUaguKEoti09MLsnMz7NSqIYw4vMSc1OtFKCcnMziktQ8oNrS4tQioJrMPCC3BCidlpZZlJsIUlNbGwsAlpUd/g==": "utter_affirmation",
+    "eJyLrq7VUaguKEoti09MLsnMz7NSqIYw4vMSc1OtFKCcnMziktQ8oNrS4tQioJrMPCC3BCidlpZZlJsIUlNLwKTSkpLUonhkDfhNiwUATFw8Ag==": "action_listen",
+    "eJyLrq7VUaguKEoti09MLsnMz7NSqIYw4vMSc1OtFKCcnMziktQ8oNrS4tQioJrMPCC3xEohJTUvM7W2NhYA6Xcbcw==": "utter_denie",
+    "eJyLrq7VUaguKEoti09MLsnMz7NSqIYw4vMSc1OtFKCcnMziktQ8oNrS4tQioJrMPCC3xEohJTUvM7WWgBmlJSWpRfEQpbhMiAUAO4Y0YQ==": "action_listen",
+    "eJyLrq7VUaguKEoti09MLsnMz7NSqIYw4vMSc1OtFKCcnMziktQ8oNrS4tQioJrMPCC3xEohvygltSg+LT8/pbY2FgB5Mx2R": "action_order_food",
+    "eJyLrq7VUaguKEoti09MLsnMz7NSqIYw4vMSc1OtFKCcnMziktQ8oNrS4tQioJrMPCC3xEohvygltSg+LT8/pZY4g5A04DUsFgDM8TsF": "action_listen",
+    "eJyLrq7VUaguKEoti09MLsnMz7NSqIYw4vMSc1OtFKCcnMziktQ8oNrS4tQioJrMPCC3xEohvygltSg+LT8/pZY4g5A0UG4YLldl5qXlF+VCTYoFAPM5V1Q=": "action_confirm_order",
+    "eJyLrq7VUaguKEoti09MLsnMz7NSqIYw4vMSc1OtFKCcnMziktQ8oNrS4tQioJrMPCC3xEohvygltSg+LT8/pZY4g5A0UG4YLldl5qXlF+WSYlJyfl5aJlAL2AkEDIwFAINGdn0=": "action_listen",
+    "eJyLrq7VUaguKEoti09MLsnMz7NSqIYw4vMSc1OtFKCcnMziktQ8oNrS4tQioJrMPCC3xEqhODGntCQRpKS4tjYWAJhCHiU=": "utter_salutations",
+    "eJyLrq7VUaguKEoti09MLsnMz7NSqIYw4vMSc1OtFKCcnMziktQ8oNrS4tQioJrMPCC3xEqhODGntCQRpKS4loBJpSUlqUXxyBrwmxYLAGGwPHc=": "action_listen",
+    "eJyLrq7VUaguKEoti09MLsnMz7NSqIYw4vMSc1OtFKCcnMziktQ8oNrS4tQioJrMPCC3xEqhODGntCQRpKS4loBJpSUlqUXxyBooMY2Au7LyK1NLK1Bsq40FAG52W+4=": "utter_joyeux_salutations",
+    "eJyLrq7VUaguKEoti09MLsnMz7NSqIYw4vMSc1OtFKCcnMziktQ8oNrS4tQioJrMPCC3xEqhODGntCQRpKS4loBJpSUlqUXxyBooMY2Au7LyK1NLK+JJdh4WfUSZHQsA81OARg==": "action_listen",
+    "eJyLrq7VUaguKEoti09MLsnMz7NSqIYw4vMSc1OtFKCcnMziktQ8oNrS4tQioJrMPCC3BChdGg/Um59ZVFsbCwBb5h06": "utter_au_revoir",
+    "eJyLrq7VUaguKEoti09MLsnMz7NSqIYw4vMSc1OtFKCcnMziktQ8oNrS4tQioJrMPCC3BChdGg/Um59ZVEvAnNKSktSieIRyfCbFAgDsfzm2": "action_listen",
+    "eJyLrq7VUaguKEoti09MLsnMz7NSqIYw4vMSc1OtFKCcnMziktQ8oNrS4tQioJrMPCC3xEohKzW+uDSzOL4oPym/pLY2FgDUbh7l": "utter_je_suis_robot",
+    "eJyLrq7VUaguKEoti09MLsnMz7NSqIYw4vMSc1OtFKCcnMziktQ8oNrS4tQioJrMPCC3xEohKzW+uDSzOL4oPym/pJaAWaUlJalF8ahaCJkYCwDOSz63": "action_listen"
+  }
+}
