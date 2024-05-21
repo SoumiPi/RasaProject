@@ -13,11 +13,11 @@ class ExtractFoodEntity(Action):
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
 
-        food_entity = next(tracker.get_latest_entity_values('food'), None)
+        food_entity = next(tracker.get_latest_entity_values('nourriture'), None)
         if food_entity:
-            dispatcher.utter_message(text=f"You have selected {food_entity} as your food choice")
+            dispatcher.utter_message(text=f" J'ai selectioné {food_entity} comme votre choix ")
         else:
-            dispatcher.utter_message(text=f"I am sorry, I coud not detect the food choice")
+            dispatcher.utter_message(text=f"Désolé, je ne comprends votre choix")
 
         return []
 
@@ -29,7 +29,7 @@ class OrderFoodAction(Action):
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
 
-        dispatcher.utter_message(text = "Sure, which kind of food would you like to order ")
+        dispatcher.utter_message(text = "D'accord, quelle nourriture voulez-vous? ")
 
         return []
 
@@ -45,9 +45,9 @@ class ConfrimOrderAction(Action):
 
         food_entity = next(tracker.get_latest_entity_values('food'), None)
         if food_entity:
-            dispatcher.utter_message(text=f"I have order {food_entity} for you")
+            dispatcher.utter_message(text=f"J'ai commandé {food_entity} pour vous")
         else:
-            dispatcher.utter_message(text=f"I am sorry, I coud not detect the food choice")
+            dispatcher.utter_message(text=f"Désolé, je ne comprend pas le choix de la nourriture que vous avez fait")
 
         return []
 
