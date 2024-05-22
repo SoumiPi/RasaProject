@@ -29,10 +29,24 @@ class OrderFoodAction(Action):
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
 
+
         dispatcher.utter_message(text = "D'accord, quelle nourriture voulez-vous? ")
 
         return []
 
+
+# class AksFoodPrice(Action):
+#     def name(self) -> Text:
+#         return "ask_food_price"
+
+#     def run(self, dispatcher: CollectingDispatcher,
+#             tracker: Tracker,
+#             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+
+#         price_entity = next(tracker.get_latest_entitu_values)
+#         dispatcher.utter_message(text = "D'accord, quelle nourriture voulez-vous? ")
+
+#         return []
 
 class ConfrimOrderAction(Action):
     def name(self) -> Text:
@@ -43,7 +57,7 @@ class ConfrimOrderAction(Action):
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
 
-        food_entity = next(tracker.get_latest_entity_values('food'), None)
+        food_entity = next(tracker.get_latest_entity_values('nourriture'), None)
         if food_entity:
             dispatcher.utter_message(text=f"J'ai commandé {food_entity} pour vous")
         else:
