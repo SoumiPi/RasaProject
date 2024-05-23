@@ -28,13 +28,23 @@ stories:
     - intent: affirmation
     - action: utter_affirmation
 
-- story: order my pizza
+- story: commander de la pizza
+  steps:
+    - intent: order_pizza
+    - action: action_extract_food_entity
+
+- story: order my food
   steps:
   - intent: order_food
   - action: action_order_food
   - intent: inform_food
   - action: action_confirm_order
 
+#Histoire de l'ajout des acteurs
+- story: ajouter des acteurs
+  steps:
+  - intent: creation_acteur
+  - action: action_recueillir_infos_acteur
 
 
 # stories:

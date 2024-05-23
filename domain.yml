@@ -11,9 +11,11 @@ intents:
   - order_pizza
   - order_food
   - inform_food
+  - creation_acteur
 
 entities:
-  - nouriture
+  - nourriture
+  - acteur
 
 responses:
   utter_salutations:
@@ -38,6 +40,7 @@ actions:
   - action_extract_food_entity
   - action_order_food
   - action_confirm_order
+  - action_recueillir_infos_acteur
 
 session_config:
   session_expiration_time: 60

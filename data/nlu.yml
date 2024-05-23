@@ -65,11 +65,11 @@ nlu:
 
 - intent: order_pizza
   examples: |
-    - Je veux commander une [pizza](nouriture)
-    - Puis-je avoir une [pizza](nouriture)
-    - J'aimerais avoir une [pizza](nouriture)
-    - Commandons une [pizza](nouriture)
-    - Que diriez-vous d'une [pizza](nouriture)
+    - Je veux commander une [pizza](nourriture)
+    - Puis-je avoir une [pizza](nourriture)
+    - J'aimerais avoir une [pizza](nourriture)
+    - Commandons une [pizza](nourriture)
+    - Que diriez-vous d'une [pizza](nourriture)
 
 - intent: order_food
   examples: |
@@ -83,11 +83,34 @@ nlu:
 
 - intent: inform_food
   examples: |
-    - [steak](nouriture)
-    - [burger](nouriture)
-    - [sushi](nouriture)
-    - [salade](nouriture)
-    - [pâtes](nouriture)
+    - [steak](nourriture)
+    - [burger](nourriture)
+    - [sushi](nourriture)
+    - [salade](nourriture)
+    - [pâtes](nourriture)
+
+#Creation des acteurs
+#creation des intervenants
+
+- intent: creation_acteur
+  examples: |
+    - Je veux ajouter un [intervenant](acteur)
+    - Ajoute un [intervenant](acteur)
+    - Un [intervenant](acteur)
+    - Puis-je ajouter un [intervenant](acteur)?
+    - Puis-je créer un [intervenant](acteur)?
+    - Est-ce possible d'ajouter un [intervenant](acteur)?
+    - Crée un [intervenant](acteur)
+    - Je veux ajouter un [fournisseur](acteur)
+    - Ajoute un [fournisseur](acteur)
+    - Un [fournisseur](acteur)
+    - Puis-je ajouter un [fournisseur](acteur)?
+    - Puis-je créer un [fournisseur](acteur)?
+    - Est-ce possible d'ajouter un [fournisseur](acteur)?
+    - Crée un [fournisseur](acteur)
+
+
+
 
 # nlu:
 # - intent: greet
