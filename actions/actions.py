@@ -51,34 +51,3 @@ class ConfirmOrderAction(Action):
 
 
 #Creation des acteurs
-
-
-class ActionRecueillirInfosActeur(Action):
-    def name(self) -> Text:
-        return "action_recueillir_infos_acteur"
-
-    def run(self, dispatcher: CollectingDispatcher,
-            tracker: Tracker,
-            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
-
-        # Liste des informations à recueillir
-        infos_a_recueillir = ["nom", "prénom", "code", "numéro de téléphone"]
-
-        # Initialiser le dictionnaire pour stocker les informations de l'acteur
-        acteur_infos = {}
-
-        # Vérifier chaque information et demander à l'utilisateur si elle manque
-        for info in infos_a_recueillir:
-            if not tracker.get_slot(info):
-                dispatcher.utter_message(text="Pourriez-vous me fournir {} de l'acteur ?".format(info))
-                return []
-
-            # Si l'information est fournie, l'ajouter au dictionnaire
-            acteur_infos[info] = tracker.get_slot(info)
-
-        # Afficher les informations recueillies avec succès
-        dispatcher.utter_message(text="Informations de l'acteur recueillies avec succès:")
-        for info, valeur in acteur_infos.items():
-            dispatcher.utter_message(text="- {}: {}".format(info.capitalize(), valeur))
-
-        return []
