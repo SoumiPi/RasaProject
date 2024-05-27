@@ -1,16 +1,12 @@
 from flask import Flask, render_template, request, jsonify
 import requests
 
-
 RASA_API_URL = 'http://localhost:5005/webhooks/rest/webhook'
 app = Flask(__name__)
 
-
 @app.route('/')
-
 def index():
-    return render_template('index.html')
-
+    return render_template('chat.html')
 
 @app.route('/webhook', methods=['POST'])
 def webhook():
@@ -29,7 +25,5 @@ def webhook():
     # Return bot's response
     return jsonify({'response': bot_response})
 
-
-
 if __name__ == "__main__":
-    app.run(debug=True, port=3000)
+    app.run(debug=True, host='0.0.0.0', port=3000)

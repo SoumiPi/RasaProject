@@ -11,11 +11,14 @@ intents:
   - order_pizza
   - order_food
   - inform_food
-  - creation_acteur
+  - thanks
+
 
 entities:
   - nourriture
-  - acteur
+
+
+
 
 responses:
   utter_salutations:
@@ -36,11 +39,14 @@ responses:
   utter_joyeux_salutations:
     - text: "Super alors, que puis-je faire pour vous?"
 
+  utter_thanks:
+  - text: "C'est avec plaisir! Auriez-vous besoin d'autres choses ?"
+
 actions:
   - action_extract_food_entity
   - action_order_food
   - action_confirm_order
-  - action_recueillir_infos_acteur
+
 
 session_config:
   session_expiration_time: 60

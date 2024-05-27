@@ -10,3 +10,4 @@ rules:
   steps:
     - intent: je_suis_robot
     - action: utter_je_suis_robot
+

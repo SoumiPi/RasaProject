@@ -39,7 +39,7 @@
         </div>
 
         <div class="card-footer">
-            <input type="text" class="form-control" id="chat-widget-input" placeholder="Type your message...">
+            <input type="text" class="form-control" id="chat-widget-input" placeholder="Taper votre message...">
         </div>
 
     </div>
@@ -64,7 +64,7 @@
         $("#chat-widget-input").val("");
 
         // Append user message to the chatbox
-        $("#chat-widget-messages").append("<div><strong>You:</strong> " + userMessage + "</div>");
+        $("#chat-widget-messages").append("<div><strong>Vous:</strong> " + userMessage + "</div>");
 
 
         // Send user message to the server and get bot's response
@@ -76,7 +76,7 @@
             success: function(data) {
                 let botResponse = data.response;
                 // Append bot's response to the chatbox
-                $("#chat-widget-messages").append("<div><strong>Bot:</strong> " + botResponse + "</div>");
+                $("#chat-widget-messages").append("<div><strong>Assistant:</strong> " + botResponse + "</div>");
             },
             error: function() {
                 // Handle error if needed

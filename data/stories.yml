@@ -23,6 +23,11 @@ stories:
     - intent: denie
     - action: utter_denie
 
+- story: remerciement
+  steps:
+    - intent: thanks
+    - action: utter_thanks
+
 - story: faire une affirmation
   steps:
     - intent: affirmation
@@ -35,48 +40,10 @@ stories:
 
 - story: order my food
   steps:
-  - intent: order_food
-  - action: action_order_food
-  - intent: inform_food
-  - action: action_confirm_order
+    - intent: order_food
+    - action: action_order_food
+    - intent: inform_food
+    - action: action_confirm_order
 
-#Histoire de l'ajout des acteurs
-- story: ajouter des acteurs
-  steps:
-  - intent: creation_acteur
-  - action: action_recueillir_infos_acteur
+#fournisseur
 
-
-# stories:
-
-# - story: happy path
-#   steps:
-#   - intent: greet
-#   - action: utter_greet
-#   - intent: mood_great
-#   - action: utter_happy
-
-# - story: sad path 1
-#   steps:
-#   - intent: greet
-#   - action: utter_greet
-#   - intent: mood_unhappy
-#   - action: utter_cheer_up
-#   - action: utter_did_that_help
-#   - intent: affirm
-#   - action: utter_happy
-
-# - story: sad path 2
-#   steps:
-#   - intent: greet
-#   - action: utter_greet
-#   - intent: mood_unhappy
-#   - action: utter_cheer_up
-#   - action: utter_did_that_help
-#   - intent: deny
-#   - action: utter_goodbye
-
-# - story: order pizza
-#   steps:
-#   - intent: order_pizza
-#   - action: utter_order_pizza
