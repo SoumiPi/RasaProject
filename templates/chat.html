@@ -17,13 +17,14 @@
             max-height: 400px; /* Définissez la hauteur maximale que vous souhaitez */
             overflow-y: auto; /* Activez le défilement vertical automatique */
         }
-
         /* Style pour les messages de l'utilisateur */
         .user-message {
             background-color: #e6e6e6; /* Couleur de fond pour les messages de l'utilisateur */
             padding: 5px;
-            margin: 5px 20px 5px 5px; /* Marge autour du message utilisateur */
+            margin: 5px 80px 5px 5px; /* Marge à droite et en bas, pas de marge à gauche et en haut */
             border-radius: 10px; /* Coins arrondis */
+            display: inline-block;
+            text-align: right; /* Aligner le texte à droite */
         }
 
         /* Style pour les messages de l'assistant */
@@ -31,9 +32,14 @@
             background-color: #3e4bf8; /* Couleur de fond pour les messages de l'assistant */
             color: white; /* Couleur de texte pour les messages de l'assistant */
             padding: 5px;
-            margin: 5px 5px 5px 20px; /* Marge autour du message assistant */
+            margin: 5px 5px 5px 80px; /* Marge à gauche et en bas, pas de marge à droite et en haut */
             border-radius: 10px; /* Coins arrondis */
+            display: inline-block;
+            text-align: left; /* Aligner le texte à gauche */
         }
+
+
+
 
     </style>
 </head>
