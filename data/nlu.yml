@@ -89,7 +89,21 @@ nlu:
     - [pâtes](nourriture)
 
 #Creation des acteurs
-#creation des intervenants
 
+- intent: ajouter_fournisseur
+  examples: |
+    - Ajouter un fournisseur
+    - Puis-je ajouter un fournisseur?
+    - Je veux ajouter un fournisseur?
+    - Peux-tu ajouter un fournisseur?
+    - Nouveau fournisseur
+
+- intent:  ajouter_intervenant
+  examples: |
+    - Ajouter un intervenant
+    - Puis-je ajouter un intervenant?
+    - Je veux ajouter un intervenant?
+    - Peux-tu ajouter un intervenant?
+    - Nouveau intervenant
 
 
