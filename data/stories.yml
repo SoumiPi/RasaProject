@@ -47,3 +47,7 @@ stories:
 
 #fournisseur
 
+- story: ajouter un fournisseur
+  steps:
+    - intent: ajouter_fournisseur
+    - action: utter_ask_add_supplier
