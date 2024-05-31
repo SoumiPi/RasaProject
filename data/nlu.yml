@@ -98,6 +98,7 @@ nlu:
     - Peux-tu ajouter un fournisseur?
     - Nouveau fournisseur
 
+#  Ajouter intervenant
 - intent:  ajouter_intervenant
   examples: |
     - Ajouter un intervenant

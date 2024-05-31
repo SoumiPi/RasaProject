@@ -12,6 +12,8 @@ intents:
   - order_food
   - inform_food
   - thanks
+  - ajouter_fournisseur
+  - ajouter_intervenant
 
 
 entities:
@@ -34,18 +36,28 @@ responses:
     - text: "Je suis un robot, développé par Rasa."
 
   utter_denie:
-    - text: "D'accord, si vous avez d'autres suggestions?"
+    - text: "D'accord!"
 
   utter_joyeux_salutations:
     - text: "Super alors, que puis-je faire pour vous?"
 
   utter_thanks:
-  - text: "C'est avec plaisir! Auriez-vous besoin d'autres choses ?"
+    - text: "C'est avec plaisir! Auriez-vous besoin d'autres choses ?"
+
+
+
+  utter_ask_add_supplier:
+    - text: "Pour ajouter un fournisseur, veuillez cliquer sur le bouton ci-dessous :"
+      buttons:
+        - title: "Ajouter Fournisseur"
+          payload: "https://centrale-casablanca.ma/"
 
 actions:
   - action_extract_food_entity
   - action_order_food
   - action_confirm_order
+  - utter_ask_add_supplier
+
 
 
 session_config:
@@ -54,43 +66,3 @@ session_config:
 
 
 
-
-# intents:
-#   - greet
-#   - goodbye
-#   - affirm
-#   - deny
-#   - mood_great
-#   - mood_unhappy
-#   - bot_challenge
-#   - order_pizza
-
-# entities:
-#   - food
-
-# responses:
-#   utter_greet:
-#   - text: "Hey! How are you?"
-
-#   utter_cheer_up:
-#   - text: "Here is something to cheer you up:"
-#     image: "https://i.imgur.com/nGF1K8f.jpg"
-
-#   utter_did_that_help:
-#   - text: "Did that help you?"
-
-#   utter_happy:
-#   - text: "Great, carry on!"
-
-#   utter_goodbye:
-#   - text: "Bye"
-
-#   utter_iamabot:
-#   - text: "I am a bot, powered by Rasa. je suis un robot"
-
-#   utter_order_pizza:
-#   - text: "Sure, which kind of pizza would want?"
-
-# session_config:
-#   session_expiration_time: 60
-#   carry_over_slots_to_new_session: true
