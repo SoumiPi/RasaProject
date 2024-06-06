@@ -107,4 +107,26 @@ nlu:
     - Peux-tu ajouter un intervenant?
     - Nouveau intervenant
 
+#Se presenter
+
+- intent: identifier_ses_interventions
+  examples: |
+    - Quelles sont mes interventions du [jour](periode)
+    - Sur quelle machine dois-je intervenir [aujourd'hui](periode)
+    - Pourriez vous me donner les équipement sur lesquels je dois intervenir [aujourd'hui](periode)
+    - Quelles interventions sont prévues pour [demain](periode) ?
+    - Sur quels équipements dois-je intervenir ce [mois](periode) ?
+    - Peut tu me donner mes interventions de cette [semaine](periode)?
+
+
+- intent: connaitre_interventions_prioritaire
+  examples: |
+    - Quelles sont les demandes d'intervention [très urgentes](priorite) ?
+    - Quelles sont les demandes d'intervention [urgentes](priorite) ?
+    - Montre moi les interventions de [haute priorité](priorite)
+    - Je veux savoir les interventions [les plus urgentes](prorité)
+    - Dans quelles machines dois-je intervenir [urgemment](priorite)?
+    - Dans quelles machines dois-je intervenir [très urgemment](priorite)?
+    - Quelles sont les interventions [prioritaire](priorite)?
+
 
