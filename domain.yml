@@ -16,12 +16,20 @@ intents:
   - ajouter_intervenant
   - identifier_ses_interventions
   - connaitre_interventions_prioritaire
+  - debut_bons_de_travail
+  - bons_de_travail_retard
+  - demander_delai_livraison
+  - demander_statut_demande
+  - demander_fournisseur
 
 
 entities:
   - nourriture
   - periode
   - priorite
+  - date_debut_BT
+  - numero_demande
+  - type_information
 
 
 
@@ -62,6 +70,8 @@ responses:
         - title: "Ajouter intervenant"
           payload: "https://formation.maintex-test.net/actors/member/member_new"
 
+
+
 actions:
   - action_extract_food_entity
   - action_order_food
@@ -70,6 +80,9 @@ actions:
   - utter_ajout_intervenant
   - action_interventions_periode
   - action_interventions_priorite
+  - action_debut_bons_de_travail
+  - action_bons_de_travail_retard
+  - action_repondre_demande_achat
 
 
 

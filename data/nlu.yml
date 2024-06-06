@@ -107,18 +107,23 @@ nlu:
     - Peux-tu ajouter un intervenant?
     - Nouveau intervenant
 
-#Se presenter
 
+#identification des interventions d'une periode oarticuliere
 - intent: identifier_ses_interventions
   examples: |
-    - Quelles sont mes interventions du [jour](periode)
+    - Quelles sont les intervention du [jour](periode)?
+    - Quelles sont les intervention de cette [semaine](periode)?
+    - quelles sont mes interventions d'[aujourd'hui](periode)?
     - Sur quelle machine dois-je intervenir [aujourd'hui](periode)
     - Pourriez vous me donner les équipement sur lesquels je dois intervenir [aujourd'hui](periode)
     - Quelles interventions sont prévues pour [demain](periode) ?
     - Sur quels équipements dois-je intervenir ce [mois](periode) ?
     - Peut tu me donner mes interventions de cette [semaine](periode)?
+    - Pourriez vous le donner mes interventions d' [aujourd'hui](periode)?
+    - Y a t-il des interventions à faire [aujourd'hui](priorité)?
+    - Y a t-il des interventions à faire [demain](priorité)?
 
-
+# identifier les demandes d'intervetions prioritaires
 - intent: connaitre_interventions_prioritaire
   examples: |
     - Quelles sont les demandes d'intervention [très urgentes](priorite) ?
@@ -129,4 +134,78 @@ nlu:
     - Dans quelles machines dois-je intervenir [très urgemment](priorite)?
     - Quelles sont les interventions [prioritaire](priorite)?
 
+# Connaitre les date de debut des bons de travails BT dans une période
+- intent: debut_bons_de_travail
+  examples: |
+    - quels sont les bons de travail qui doivent demarrer cette [semaine](date_debut_BT)
+    - quels sont les BT qui doivent demarrer cette [semaine](date_debut_BT)
+    - Donne moi les bons de travail qui commencent ce [mois](date_debut_BT)
+    - Donne moi les BT qui commencent ce [mois](date_debut_BT)
+    - Puis-je avoir les bons de travail qui sont doivent commencer cette [aujourd'hui](date_debut_BT)
+    - Puis-je avoir BT qui sont doivent commencer cette [aujourd'hui](date_debut_BT)
+    - Les bons de travail de cette [semaine](date_debut_BT)
+    - Les bons de travail de ce [mois](date_debut_BT)
+    - Les bons de travail de cette [aujourd'hui](date_debut_BT)
 
+
+#les bons de travail en retard
+- intent: bons_de_travail_retard
+  examples: |
+    - Quelles sont les bons de travail en retard?
+    - Quelles sont les BT en retard?
+
+
+#Questions pour connaitre le delai de livrai d'une demande d'achat
+- intent: demander_delai_livraison
+  examples: |
+    - Quel est le [délai de livraison](type_information) de la demande d'achat numéro [0024](numero_demande) ?
+    - Combien de temps faudra-t-il pour [livrer](type_information) la demande d'achat numéro [0069](numero_demande) ?
+    - Pouvez-vous me dire le [délai de livraison](type_information) pour la demande d'achat numéro [0032](numero_demande) ?
+    - Quand sera [livrée](type_information) la commande numéro [0025](numero_demande) ?
+    - Quand sera [livrée](type_information) la commande N° [0025](numero_demande) ?
+    - Quelle est la [date prévue de livraison](type_information) pour la demande d'achat numéro [0061](numero_demande) ?
+
+
+#Questions pour connaitre le statut d'une demande d'achat
+- intent: demander_statut_demande
+  examples: |
+    - Quel est le [statut](type_information) de la demande d'achat numéro [0024](numero_demande) ?
+    - Pouvez-vous me dire où en est la demande d'achat numéro [0069](numero_demande) ?
+    - Quelle est l'[étape actuelle](type_information) de la demande d'achat numéro [0032](numero_demande) ?
+    - La demande d'achat numéro [0025](numero_demande) est-elle [approuvée](type_information) ?
+    - Quel est l'[état actuel](type_information) de la demande d'achat numéro [0061](numero_demande) ?
+    - Quel est l'[état actuel](type_information) de la demande d'achat N° [0061](numero_demande) ?
+
+#questions pour connaitre le fournisseur d'une demande d'achat
+- intent: demander_fournisseur
+  examples: |
+    - Quel est le [fournisseur](type_information) pour la demande d'achat numéro [0024](numero_demande) ?
+    - Qui est le [fournisseur](type_information) de la demande d'achat numéro [0069](numero_demande) ?
+    - Pouvez-vous me dire le [fournisseur](type_information) pour la commande numéro [0032](numero_demande) ?
+    - Quel est le nom du [fournisseur](type_information) pour la demande d'achat numéro [0025](numero_demande) ?
+    - Qui [fournit](type_information) la demande d'achat numéro [0061](numero_demande) ?
+    - Pouvez-vous me dire le [fournisseur](type_information) pour la commande N° [0032](numero_demande) ?
+
+
+- regex: numero_demande
+  examples: |
+    - \d{4}
+
+
+- synonym: statut
+  examples: |
+    - état
+    - état actuel
+    - progression
+    - étape actuelle
+
+- synonym: fournisseur
+  examples: |
+    - vendeur
+    - prestataire
+    - fournisseur
+
+- synonym: délai de livraison
+  examples:
+    - delai de livraison
+    - date de livraison

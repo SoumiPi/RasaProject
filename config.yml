@@ -3,28 +3,58 @@
 recipe: default.v1
 
 assistant_id: default_config_bot
-language: fr  # your two-letter language code
 
+language: "fr"
 
 pipeline:
-  - name: SpacyNLP
-    model: "fr_core_news_md"
-  - name: SpacyTokenizer
-  - name: SpacyFeaturizer
+  - name: WhitespaceTokenizer
   - name: RegexFeaturizer
   - name: LexicalSyntacticFeaturizer
   - name: CountVectorsFeaturizer
+    analyzer: word
   - name: CountVectorsFeaturizer
-    analyzer: "char_wb"
+    analyzer: char_wb
     min_ngram: 1
     max_ngram: 4
+  - name: LanguageModelFeaturizer
+    model_name: "bert"
+    model_weights: "bert-base-multilingual-cased"
   - name: DIETClassifier
     epochs: 100
+    constrain_similarities: true
   - name: EntitySynonymMapper
   - name: ResponseSelector
     epochs: 100
   - name: FallbackClassifier
-    threshold: 0.7
+    threshold: 0.4
+    ambiguity_threshold: 0.1
+
+#LanguageModelFeaturizer necessite d'installer le package transformers qui lui même necessite torch ou tensorflow
+
+
+
+# language: fr  # your two-letter language code
+
+
+# pipeline:
+#   - name: SpacyNLP
+#     model: "fr_core_news_md"
+#   - name: SpacyTokenizer
+#   - name: SpacyFeaturizer
+#   - name: RegexFeaturizer
+#   - name: LexicalSyntacticFeaturizer
+#   - name: CountVectorsFeaturizer
+#   - name: CountVectorsFeaturizer
+#     analyzer: "char_wb"
+#     min_ngram: 1
+#     max_ngram: 4
+#   - name: DIETClassifier
+#     epochs: 100
+#   - name: EntitySynonymMapper
+#   - name: ResponseSelector
+#     epochs: 100
+#   - name: FallbackClassifier
+#     threshold: 0.7
 
 # # No configuration for the NLU pipeline was provided. The following default pipeline was used to train your model.
 # # If you'd like to customize it, uncomment and adjust the pipeline.

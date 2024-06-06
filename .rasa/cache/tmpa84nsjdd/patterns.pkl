@@ -1,0 +1,6 @@
+[
+  {
+    "name": "numero_demande",
+    "pattern": "\\d{4}"
+  }
+]

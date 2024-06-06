@@ -70,3 +70,33 @@ stories:
   steps:
     - intent: connaitre_interventions_prioritaire
     - action: action_interventions_priorite
+
+#Connaitre les date debut des bons de travail
+- story: Connaitre les date debut des bons de travail
+  steps:
+    - intent: debut_bons_de_travail
+    - action: action_debut_bons_de_travail
+
+#Connaitre les bons de travail en retard
+- story: Connaitre les date debut des bons de travail
+  steps:
+    - intent: bons_de_travail_retard
+    - action: action_bons_de_travail_retard
+
+#Connaitre le founisseur et le statut d'une demande d'achat avec le numero de la demande d'achat
+- story: Connnaitre le founisseur et le statut d'une demande d'achat avec le numero de la demande d'achat
+  steps:
+    - intent: demander_delai_livraison
+    - action: action_repondre_demande_achat
+
+- story: Connnaitre le founisseur et le statut d'une demande d'achat avec le numero de la demande d'achat
+  steps:
+    - intent: demander_statut_demande
+    - action: action_repondre_demande_achat
+
+- story: Connnaitre le founisseur et le statut d'une demande d'achat avec le numero de la demande d'achat
+  steps:
+    - intent: demander_fournisseur
+    - action: action_repondre_demande_achat
+
+

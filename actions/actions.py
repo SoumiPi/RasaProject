@@ -1,5 +1,4 @@
 from typing import Any, Text, Dict, List
-
 from rasa_sdk import Action, Tracker
 from rasa_sdk.executor import CollectingDispatcher
 
@@ -62,7 +61,7 @@ class ConfirmOrderAction(Action):
 
         periode_entity = next(tracker.get_latest_entity_values('periode'), None)
         if periode_entity:
-            if periode_entity == "aujourd'hui":
+            if periode_entity == "aujourd'hui" or "jour":
                 dispatcher.utter_message(text=f"Vous intervenez {periode_entity} aux machines y et y et votre interventions consite à .......")
 
             if periode_entity == "mois":
@@ -80,7 +79,7 @@ class ConfirmOrderAction(Action):
         return []
 
 
-
+# Classe qui permet d'extraire les entité qui sont les priorité d'intervention
 class ConfirmOrderAction(Action):
     def name(self) -> Text:
         return "action_interventions_priorite"
@@ -97,10 +96,78 @@ class ConfirmOrderAction(Action):
             if priority_entity == "urgentes":
                 dispatcher.utter_message(text=f"Les interventions {priority_entity} sont celles  au niveau des machines y")
 
-            if priority_entity == "très urgemment" or "haute priorité" or "les plus urgentes" or "proritaire":
-                dispatcher.utter_message(text=f"Vos inteventions les plus urgentes sont aux machines XXX  .......")
-
         else:
             dispatcher.utter_message(text="Désolé, je n'arrive pas extraire les interventions voulues.")
 
         return []
+
+
+#classe qui permet d'extraire les date de  debut d'excution des bons de travail
+class ConfirmOrderAction(Action):
+    def name(self) -> Text:
+        return "action_debut_bons_de_travail"
+
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+
+        Bon_date_entity = next(tracker.get_latest_entity_values('date_debut_BT'), None)
+        if Bon_date_entity:
+            if Bon_date_entity == "mois":
+                dispatcher.utter_message(text=f"Les bons de travail qui commencent ce {Bon_date_entity} sont les bons .......")
+
+            if Bon_date_entity == "aujourd'hui":
+                dispatcher.utter_message(text=f"Les bons de travail qui doivent demarrer {Bon_date_entity} sont les suivantes: ...... Il s'agit de ....")
+
+            if Bon_date_entity == "semaine":
+                dispatcher.utter_message(text=f"Les bons de travail qui commencent cette  {Bon_date_entity} sont les bons N° 0061 ET N° 0021")
+
+        else:
+            dispatcher.utter_message(text="Désolé, je n'arrive pas extraire les dates voulues.")
+
+        return []
+
+
+class ConfirmOrderAction(Action):
+    def name(self) -> Text:
+        return "action_bons_de_travail_retard"
+
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+
+        dispatcher.utter_message(text="Les bons de travail en retard sont ............")
+
+        return []
+
+
+#Gestion des demande d'achat: Class qui gerer permettre les demande d'achat, leur founisseur à travers les numéro de commande d'achat
+class ActionRepondreInformation(Action):
+    def name(self) -> Text:
+        return "action_repondre_demande_achat"
+
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+
+        type_info = next(tracker.get_latest_entity_values('type_information'), None)
+        numero_demande = next(tracker.get_latest_entity_values('numero_demande'), None)
+
+        if not numero_demande:
+            dispatcher.utter_message(text="Désolé, je n'ai pas trouvé le numéro de la demande d'achat. Pouvez-vous préciser ?")
+            return []
+
+        # Simulated responses for demonstration purposes
+        if type_info == "délai de livraison":
+            response = f"Le délai de livraison pour la demande d'achat numéro {numero_demande} est de 5 jours."
+        elif type_info == "statut":
+            response = f"Le statut actuel de la demande d'achat numéro {numero_demande} est 'En cours de traitement'."
+        elif type_info == "fournisseur":
+            response = f"Le fournisseur pour la demande d'achat numéro {numero_demande} est 'SOFIANE'."
+        else:
+            response = "Je ne suis pas sûr du type d'information que vous demandez. Pouvez-vous préciser si vous voulez le délai de livraison, le statut ou le fournisseur ?"
+
+        dispatcher.utter_message(text=response)
+
+        return []
+
