@@ -1,0 +1,28 @@
+[
+  {
+    "tag_name": "entity",
+    "ids_to_tags": {
+      "1": "B-appelation",
+      "2": "I-appelation",
+      "3": "L-appelation",
+      "4": "U-appelation",
+      "5": "B-nourriture",
+      "6": "I-nourriture",
+      "7": "L-nourriture",
+      "8": "U-nourriture",
+      "0": "O"
+    },
+    "tags_to_ids": {
+      "B-appelation": 1,
+      "I-appelation": 2,
+      "L-appelation": 3,
+      "U-appelation": 4,
+      "B-nourriture": 5,
+      "I-nourriture": 6,
+      "L-nourriture": 7,
+      "U-nourriture": 8,
+      "O": 0
+    },
+    "num_tags": 9
+  }
+]

@@ -14,11 +14,14 @@ intents:
   - thanks
   - ajouter_fournisseur
   - ajouter_intervenant
+  - identifier_ses_interventions
+  - connaitre_interventions_prioritaire
 
 
 entities:
   - nourriture
-
+  - periode
+  - priorite
 
 
 
@@ -46,17 +49,27 @@ responses:
 
 
 
-  utter_ask_add_supplier:
-    - text: "Pour ajouter un fournisseur, veuillez cliquer sur le bouton ci-dessous :"
+  utter_ajout_fournisseur:
+    - text: "Veuillez cliquer le lien :"
       buttons:
         - title: "Ajouter Fournisseur"
-          payload: "https://centrale-casablanca.ma/"
+          payload: "https://formation.maintex-test.net/actors/supplier/supplier_new"
+
+
+  utter_ajout_intervenant:
+    - text: "Cliquez sur le bouton ci-dessous :"
+      buttons:
+        - title: "Ajouter intervenant"
+          payload: "https://formation.maintex-test.net/actors/member/member_new"
 
 actions:
   - action_extract_food_entity
   - action_order_food
   - action_confirm_order
-  - utter_ask_add_supplier
+  - utter_ajout_fournisseur
+  - utter_ajout_intervenant
+  - action_interventions_periode
+  - action_interventions_priorite
 
 
 

@@ -50,5 +50,23 @@ stories:
 - story: ajouter un fournisseur
   steps:
     - intent: ajouter_fournisseur
-    - action: utter_ask_add_supplier
+    - action: utter_ajout_fournisseur
 
+#intevenant
+- story: ajouter un intervenant
+  steps:
+    - intent: ajouter_intervenant
+    - action: utter_ajout_intervenant
+
+#pour savoir les interventions a une periode précise
+
+- story: savoir les interventions que je dois faire sur une periode donnée
+  steps:
+    - intent: identifier_ses_interventions
+    - action: action_interventions_periode
+
+# savoir quelles sont les interventions prioritaires
+- story: savoir les interventions que je dois faire sur une periode donnée
+  steps:
+    - intent: connaitre_interventions_prioritaire
+    - action: action_interventions_priorite
