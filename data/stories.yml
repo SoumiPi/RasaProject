@@ -100,3 +100,13 @@ stories:
     - action: action_repondre_demande_achat
 
 
+#histoire sur la demande de la situation des demades d'achat validée
+- story: demander_situation_demande_achat_validee
+  steps:
+    - intent: demander_situation_demande_achat_validee
+    - action: action_demander_situation_demande_achat_validee
+
+- story: connaitre le delai de livraison de d'un bon de commande
+  steps:
+    - intent: bons_commande_date_livraison
+    - action: action_bons_commande_date_livraison

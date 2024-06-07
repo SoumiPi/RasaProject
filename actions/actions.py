@@ -51,7 +51,7 @@ class ConfirmOrderAction(Action):
 
 #Extractin des periode d'interventions
 
-class ConfirmOrderAction(Action):
+class RepondrePeriodeIntervention(Action):
     def name(self) -> Text:
         return "action_interventions_periode"
 
@@ -80,7 +80,7 @@ class ConfirmOrderAction(Action):
 
 
 # Classe qui permet d'extraire les entité qui sont les priorité d'intervention
-class ConfirmOrderAction(Action):
+class RepondrePrioriteIntervention(Action):
     def name(self) -> Text:
         return "action_interventions_priorite"
 
@@ -103,7 +103,7 @@ class ConfirmOrderAction(Action):
 
 
 #classe qui permet d'extraire les date de  debut d'excution des bons de travail
-class ConfirmOrderAction(Action):
+class DebutBonDeTravail(Action):
     def name(self) -> Text:
         return "action_debut_bons_de_travail"
 
@@ -128,7 +128,7 @@ class ConfirmOrderAction(Action):
         return []
 
 
-class ConfirmOrderAction(Action):
+class BonTravailRetard(Action):
     def name(self) -> Text:
         return "action_bons_de_travail_retard"
 
@@ -142,7 +142,7 @@ class ConfirmOrderAction(Action):
 
 
 #Gestion des demande d'achat: Class qui gerer permettre les demande d'achat, leur founisseur à travers les numéro de commande d'achat
-class ActionRepondreInformation(Action):
+class RepondreDemandeAchat(Action):
     def name(self) -> Text:
         return "action_repondre_demande_achat"
 
@@ -159,11 +159,14 @@ class ActionRepondreInformation(Action):
 
         # Simulated responses for demonstration purposes
         if type_info == "délai de livraison":
-            response = f"Le délai de livraison pour la demande d'achat numéro {numero_demande} est de 5 jours."
+            response = f"Le délai de livraison pour la demande d'achat numéro {numero_demande} est 12-05-2024."
+
         elif type_info == "statut":
             response = f"Le statut actuel de la demande d'achat numéro {numero_demande} est 'En cours de traitement'."
+
         elif type_info == "fournisseur":
             response = f"Le fournisseur pour la demande d'achat numéro {numero_demande} est 'SOFIANE'."
+
         else:
             response = "Je ne suis pas sûr du type d'information que vous demandez. Pouvez-vous préciser si vous voulez le délai de livraison, le statut ou le fournisseur ?"
 
@@ -171,3 +174,52 @@ class ActionRepondreInformation(Action):
 
         return []
 
+
+#Classe de la demande d'achat v
+class ActionDemanderSituationDemandeAchatValidee(Action):
+    def name(self) -> Text:
+        return "action_demander_situation_demande_achat_validee"
+
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+
+        # Extraction des entités 'situation' et 'periode_demande'
+        situation = next(tracker.get_latest_entity_values('situation'), None)
+        periode_demande = next(tracker.get_latest_entity_values('periode_demande'), None)
+
+        # Vérification des entités extraites et génération de la réponse
+        if situation and periode_demande:
+            response = f"Les demandes d'achat '{situation}' dans la période de :'{periode_demande}' sont les demandes 0061, 0035 , etc."
+        else:
+            response = "Désolé, je n'ai pas compris la situation ou la période de demande spécifiée."
+
+        dispatcher.utter_message(text=response)
+
+        return []
+
+
+    #delai de livraison
+
+class ActionBonsCommandeDateLivraison(Action):
+    def name(self) -> Text:
+        return "action_bons_commande_date_livraison"
+
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+
+        # Extraction des entités 'date_livraison' et 'periode_livraison'
+        type_information = next(tracker.get_latest_entity_values('type_information'), None)
+        periode_livraison = next(tracker.get_latest_entity_values('periode_livraison'), None)
+
+        # Construction du message de réponse en fonction des entités extraites
+        if type_information and periode_livraison:
+            response = f"Les commandes qui doivent être livrées '{periode_livraison}' sont les commandes N° ......."
+
+
+        else:
+            response = "Désolé, je n'ai pas compris la date ou la période de livraison spécifiée."
+
+        dispatcher.utter_message(text=response)
+        return []

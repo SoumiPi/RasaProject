@@ -21,6 +21,8 @@ intents:
   - demander_delai_livraison
   - demander_statut_demande
   - demander_fournisseur
+  - demander_situation_demande_achat_validee
+  - bons_commande_date_livraison
 
 
 entities:
@@ -30,6 +32,9 @@ entities:
   - date_debut_BT
   - numero_demande
   - type_information
+  - situation
+  - periode_demande
+  - periode_livraison
 
 
 
@@ -83,6 +88,8 @@ actions:
   - action_debut_bons_de_travail
   - action_bons_de_travail_retard
   - action_repondre_demande_achat
+  - action_demander_situation_demande_achat_validee
+  - action_bons_commande_date_livraison
 
 
 

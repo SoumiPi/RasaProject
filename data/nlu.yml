@@ -151,8 +151,11 @@ nlu:
 #les bons de travail en retard
 - intent: bons_de_travail_retard
   examples: |
-    - Quelles sont les bons de travail en retard?
-    - Quelles sont les BT en retard?
+    - Quels sont les bons de travail en retard?
+    - Quels sont les BT en retard?
+    - Quels sont les bons de travail dont la date de début souhaité est en retard?
+    - Quels sont les bons de travail dont la date de début souhaité est en retard?
+
 
 
 #Questions pour connaitre le delai de livrai d'une demande d'achat
@@ -166,11 +169,11 @@ nlu:
     - Quelle est la [date prévue de livraison](type_information) pour la demande d'achat numéro [0061](numero_demande) ?
 
 
-#Questions pour connaitre le statut d'une demande d'achat
+#Questions pour connaitre le statut d'une demande d'achat à partir du numéo de demande
 - intent: demander_statut_demande
   examples: |
     - Quel est le [statut](type_information) de la demande d'achat numéro [0024](numero_demande) ?
-    - Pouvez-vous me dire où en est la demande d'achat numéro [0069](numero_demande) ?
+    - Pouvez-vous me dire [où en est](type_information) la demande d'achat numéro [0069](numero_demande) ?
     - Quelle est l'[étape actuelle](type_information) de la demande d'achat numéro [0032](numero_demande) ?
     - La demande d'achat numéro [0025](numero_demande) est-elle [approuvée](type_information) ?
     - Quel est l'[état actuel](type_information) de la demande d'achat numéro [0061](numero_demande) ?
@@ -181,18 +184,73 @@ nlu:
   examples: |
     - Quel est le [fournisseur](type_information) pour la demande d'achat numéro [0024](numero_demande) ?
     - Qui est le [fournisseur](type_information) de la demande d'achat numéro [0069](numero_demande) ?
+    - Qui est le [fournisseur](type_information) de la demande d'achat numéro [0069](numero_demande) ?
     - Pouvez-vous me dire le [fournisseur](type_information) pour la commande numéro [0032](numero_demande) ?
     - Quel est le nom du [fournisseur](type_information) pour la demande d'achat numéro [0025](numero_demande) ?
+    - Quel est le nom du [fournisseur](type_information) pour la demande d'achat [0025](numero_demande) ?
     - Qui [fournit](type_information) la demande d'achat numéro [0061](numero_demande) ?
     - Pouvez-vous me dire le [fournisseur](type_information) pour la commande N° [0032](numero_demande) ?
+    - Le [fournisseur](type_information) de la demande d'achat [0000](numero_demande)
+
+#connaitre les demandes d'achat validéé . entités : situation, periode_demande
+- intent: demander_situation_demande_achat_validee
+  examples: |
+    - Quels sont les demande d'achat dont l'état actuelles est [validé](situation) la [semaine dernière](periode_demande)?
+    - Quel sont les demandes d'achat qui ont un statut [validé](situation) il y a [10](periode_demande) jours ?
+    - Donne nles demandes d'achat qui sont une situation [validée](situation)  [il y a une semaine](periode_demande)?
+    - Donne nles demandes d'achat qui sont une situation [validée](situation)  [il y a un mois](periode_demande)?
+    - Quels sont les demandes d'achat [validées](situation) la [semaine dernière](periode_demande)?
+    - Quels sont les demande d'achat dont l'état actuelles est [validé](situation) il y a [10 jours](periode_demande) ?
+    - Quel sont les demandes d'achat qui ont un statut [validé](situation) la [semaine dernière](periode_demande)?
+    - Donne nles demandes qui sont une situation [validée](situation) la [aujourd'hui](periode_demande)?
+    - Je veux savoir la situation des demandes d'achat [validdées](situation) validées cette [semaine](periode_demande)
+    - Veux tu me donner les demandes d'achat [validées](situations) [aujourd'hui](periode_demande)?
+
+
+#Questions sur les bons de commandes
+- intent: bons_commande_date_livraison
+  examples: |
+    - Quels bons de commande ont un [délai de livraison](type_information) prévue [cette semaine](periode_livraison) ?
+    - Quels sont les bons de commande avec une [date de livraison](type_information) prévue [aujourd'hui](periode_livraison) ?
+    - Pouvez-vous me dire les bons de commande qui doivent être [livrés](type_information) [cette semaine](periode_livraison) ?
+    - Quels bons de commande doivent être [livrés](type_information) [aujourd'hui](periode_livraison) ?
+    - Les bons de commande avec une [date de livraison](type_information) [cette semaine](periode_livraison) sont lesquels ?
+    - Quels bons de commande ont une [delai de livraison](type_information) pour [aujourd'hui](periode_livraison) ?
+    - Quelles sont les dates de livraison des bons de commande pour [cette semaine](periode_livraison) ?
+    - Quels bons de commande sont attendus [cette semaine](periode_livraison) ?
+    - Pouvez-vous me donner les bons de commande qui doivent arriver [cette semaine](periode_livraison) ?
+    - Quels bons de commande ont une [délai de livraison](type_information) fixée [cette semaine](periode_livraison) ?
+    - Quels bons de commande seront [livrés](type_information) [aujourd'hui](periode_livraison) ?
+    - Donne les commandes doivent être [livrées](type_information) [aujourd'hui](periode_livraison)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 - regex: numero_demande
   examples: |
     - \d{4}
 
+- synonym: validé
+  examples: |
+    - validée
+    - approuvé
+    - accepté
+    - accordé
+    - validés
 
-- synonym: statut
+- synonym: situation
   examples: |
     - état
     - état actuel
@@ -203,9 +261,14 @@ nlu:
   examples: |
     - vendeur
     - prestataire
-    - fournisseur
 
 - synonym: délai de livraison
-  examples:
+  examples: |
     - delai de livraison
     - date de livraison
+
+- synonym: demande d'achat
+  examples: |
+    - DA
+    - D.A
+    - D.A.
