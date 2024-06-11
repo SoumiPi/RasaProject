@@ -10,6 +10,7 @@ nlu:
     - Bonsoir
     - hey ici
     - Allons
+    - hello
 
 - intent: joyeux_salutations
   examples: |
@@ -107,7 +108,7 @@ nlu:
     - Peux-tu ajouter un intervenant?
     - Nouveau intervenant
 
-
+# TECHNICIEN DE MAINTENANCE++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 #identification des interventions d'une periode oarticuliere
 - intent: identifier_ses_interventions
   examples: |
@@ -120,8 +121,8 @@ nlu:
     - Sur quels équipements dois-je intervenir ce [mois](periode) ?
     - Peut tu me donner mes interventions de cette [semaine](periode)?
     - Pourriez vous le donner mes interventions d' [aujourd'hui](periode)?
-    - Y a t-il des interventions à faire [aujourd'hui](priorité)?
-    - Y a t-il des interventions à faire [demain](priorité)?
+    - Y a t-il des interventions à faire [aujourd'hui](periode)?
+    - Y a t-il des interventions à faire [demain](periode)?
 
 # identifier les demandes d'intervetions prioritaires
 - intent: connaitre_interventions_prioritaire
@@ -129,10 +130,13 @@ nlu:
     - Quelles sont les demandes d'intervention [très urgentes](priorite) ?
     - Quelles sont les demandes d'intervention [urgentes](priorite) ?
     - Montre moi les interventions de [haute priorité](priorite)
-    - Je veux savoir les interventions [les plus urgentes](prorité)
+    - Je veux savoir les interventions [les plus urgentes](priorite)
     - Dans quelles machines dois-je intervenir [urgemment](priorite)?
     - Dans quelles machines dois-je intervenir [très urgemment](priorite)?
     - Quelles sont les interventions [prioritaire](priorite)?
+    - Peut tu me donner les demandes d'inyterventions les [plus urgentes](priorite)?
+    - Quelles sont les interventions les plus [urgentes](priorite)?
+    - Peut tu me donner les demandes d'interventions les plus [urgentes](priorite)?
 
 # Connaitre les date de debut des bons de travails BT dans une période
 - intent: debut_bons_de_travail
@@ -154,30 +158,33 @@ nlu:
     - Quels sont les bons de travail en retard?
     - Quels sont les BT en retard?
     - Quels sont les bons de travail dont la date de début souhaité est en retard?
+    - Quels sont les BT en retard de livraison
     - Quels sont les bons de travail dont la date de début souhaité est en retard?
+    - Y a t-il des bons de travail en retard?
 
 
-
+#GESTIONNAIRE DES ACHATS*********************************************************************************************************************************
 #Questions pour connaitre le delai de livrai d'une demande d'achat
 - intent: demander_delai_livraison
   examples: |
     - Quel est le [délai de livraison](type_information) de la demande d'achat numéro [0024](numero_demande) ?
     - Combien de temps faudra-t-il pour [livrer](type_information) la demande d'achat numéro [0069](numero_demande) ?
     - Pouvez-vous me dire le [délai de livraison](type_information) pour la demande d'achat numéro [0032](numero_demande) ?
-    - Quand sera [livrée](type_information) la commande numéro [0025](numero_demande) ?
-    - Quand sera [livrée](type_information) la commande N° [0025](numero_demande) ?
+    - Quand sera [livrée](type_information) la demande d'achat [0025](numero_demande) ?
+    - Quand sera [livrée](type_information) la demande d'achat N° [0025](numero_demande) ?
     - Quelle est la [date prévue de livraison](type_information) pour la demande d'achat numéro [0061](numero_demande) ?
+    - Donne le [delai de livraison](type_information) de la demande d'achat numéro [0032](numero_demande)
 
 
 #Questions pour connaitre le statut d'une demande d'achat à partir du numéo de demande
-- intent: demander_statut_demande
+- intent: demander_statut_demande_achat
   examples: |
+    - Quel est le [situation](type_information) de la demande d'achat numéro [0024](numero_demande) ?
+    - Pouvez-vous me dire [situation](type_information) la demande d'achat numéro [0069](numero_demande) ?
+    - Quelle est la [situation](type_information) de la demande d'achat numéro [0032](numero_demande) ?
+    - Quel est la [situation](type_information) de la demande d'achat numéro [0061](numero_demande) ?
+    - Quel est la [situation](type_information) de la demande d'achat N° [0061](numero_demande) ?
     - Quel est le [statut](type_information) de la demande d'achat numéro [0024](numero_demande) ?
-    - Pouvez-vous me dire [où en est](type_information) la demande d'achat numéro [0069](numero_demande) ?
-    - Quelle est l'[étape actuelle](type_information) de la demande d'achat numéro [0032](numero_demande) ?
-    - La demande d'achat numéro [0025](numero_demande) est-elle [approuvée](type_information) ?
-    - Quel est l'[état actuel](type_information) de la demande d'achat numéro [0061](numero_demande) ?
-    - Quel est l'[état actuel](type_information) de la demande d'achat N° [0061](numero_demande) ?
 
 #questions pour connaitre le fournisseur d'une demande d'achat
 - intent: demander_fournisseur
@@ -195,16 +202,17 @@ nlu:
 #connaitre les demandes d'achat validéé . entités : situation, periode_demande
 - intent: demander_situation_demande_achat_validee
   examples: |
-    - Quels sont les demande d'achat dont l'état actuelles est [validé](situation) la [semaine dernière](periode_demande)?
+    - Quels sont les demande d'achat dont l'état actuelle est [validé](situation) la [semaine dernière](periode_demande)?
     - Quel sont les demandes d'achat qui ont un statut [validé](situation) il y a [10](periode_demande) jours ?
-    - Donne nles demandes d'achat qui sont une situation [validée](situation)  [il y a une semaine](periode_demande)?
-    - Donne nles demandes d'achat qui sont une situation [validée](situation)  [il y a un mois](periode_demande)?
+    - Donne les demandes d'achat qui sont une situation [validée](situation)  [il y a une semaine](periode_demande)?
+    - Donne les demandes d'achat qui sont une situation [validée](situation)  [il y a un mois](periode_demande)?
     - Quels sont les demandes d'achat [validées](situation) la [semaine dernière](periode_demande)?
     - Quels sont les demande d'achat dont l'état actuelles est [validé](situation) il y a [10 jours](periode_demande) ?
     - Quel sont les demandes d'achat qui ont un statut [validé](situation) la [semaine dernière](periode_demande)?
     - Donne nles demandes qui sont une situation [validée](situation) la [aujourd'hui](periode_demande)?
-    - Je veux savoir la situation des demandes d'achat [validdées](situation) validées cette [semaine](periode_demande)
-    - Veux tu me donner les demandes d'achat [validées](situations) [aujourd'hui](periode_demande)?
+    - Je veux savoir la situation des demandes d'achat [validdées](situation) [validées] cette [semaine](periode_demande)
+    - Veux tu me donner les demandes d'achat [validées](situation) [aujourd'hui](periode_demande)?
+    - Veux tu me donner les demandes d'achat [validées](situation) [recemment](periode_demande)?
 
 
 #Questions sur les bons de commandes
@@ -216,31 +224,161 @@ nlu:
     - Quels bons de commande doivent être [livrés](type_information) [aujourd'hui](periode_livraison) ?
     - Les bons de commande avec une [date de livraison](type_information) [cette semaine](periode_livraison) sont lesquels ?
     - Quels bons de commande ont une [delai de livraison](type_information) pour [aujourd'hui](periode_livraison) ?
-    - Quelles sont les dates de livraison des bons de commande pour [cette semaine](periode_livraison) ?
     - Quels bons de commande sont attendus [cette semaine](periode_livraison) ?
     - Pouvez-vous me donner les bons de commande qui doivent arriver [cette semaine](periode_livraison) ?
     - Quels bons de commande ont une [délai de livraison](type_information) fixée [cette semaine](periode_livraison) ?
     - Quels bons de commande seront [livrés](type_information) [aujourd'hui](periode_livraison) ?
-    - Donne les commandes doivent être [livrées](type_information) [aujourd'hui](periode_livraison)
+    - Donne les commandes qui doivent être [livrées](type_information) [aujourd'hui](periode_livraison)
+    - Quels sont les bons de commande qui doivent etre [livrés](type_information) [cette semaine](periode_livraison)
+    - Quels sont les bons de commande qui doivent etre [livrés](type_information) [aujoud'hui](periode_livraison)
+    - Quels sont les bons de commande à [livrer](type_information) [aujoud'hui](periode_livraison)
+    - les bons de commande à [livrer](type_information) [cette semaine](periode_livraison)
+
+
+- intent: savoir_commandes_retard_livraison
+  examples: |
+    - Quelles sont les commandes en retard de livraison ?
+    - Quelles sont les commandes qui ne sont pas encore livrées à ce jour ?
+    - Donne-moi la liste des commandes en retard de livraison.
+    - Peux-tu me dire quelles commandes sont en retard ?
+    - Quels sont les bons de commande en retard de livraison ?
+    - Quels sont les bons de commande dont la livraison est en retard ?
+    - Quelles sont les commandes dont la livraison est en retard ?
+    - Quels bons de commande ne sont pas encore livrés à ce jour ?
+    - As-tu la liste des commandes en retard de livraison ?
+    - Quels sont les retards de livraison pour les commandes ?
+    - Peux-tu m'indiquer les commandes en retard de livraison ?
+    - Quelles commandes n'ont pas été livrées dans les délais ?
+    - Quels sont les bons de commande encore en attente de livraison ?
+    - Quels bons de commande sont en retard ?
+    - Quels sont les retards de livraison pour les bons de commande ?
+    - Quelles sont les commandes non livrées à temps ?
+    - Peux-tu me donner la liste des commandes en retard de livraison ?
+    - Quelles commandes sont en retard de livraison aujourd'hui ?
+    - Quels bons de commande sont toujours en retard de livraison ?
+    - Quels sont les bons de commande qui n'ont pas été livrés dans les délais ?
 
 
 
+#MAGASINIER***************************************************************************************************************************************************
+
+- intent: demander_bon_reception_retard
+  examples: |
+    - Quels [bons de réception](bon_reception) sont en [retard de livraison](periode_livraison) ?
+    - Quels [BR](bon_reception) sont en [retard de livraison](periode_livraison) ?
+    - Quels sont les [bons de réception](bon_reception) dont la livraison est en [retard](periode_livraison) ?
+    - Quels  sont les [bons de réception](bon_reception) dont [livraison est retardée](periode_livraison) ?
+    - Quels sont les [BR](bon_reception) dont la livraison est en [retard](periode_livraison) ?
+    - Quels sont [BR](bon_reception) dont livraison est [retardée](periode_livraison) ?
+    - Donne les [bons de réception](bon_reception) qui sont en [retard de livraison](periode_livraison) ?
+    - Quels sont les [bons de reception](bon_reception) en [retard de livraison](periode_livraison)?
+
+- intent: demander_statut_bon_reception
+  examples: |
+    - Quel est la [situation](type_information) du [bon de reception](bon_reception) numéro [0024](numero_bon_reception) ?
+    - Quelle est la [situation](type_information) du [bon de reception](bon_reception) numéro [0032](numero_bon_reception) ?
+    - Quel est la [situation](type_information) du [bon de reception](bon_reception)  [0061](numero_bon_reception) ?
+    - Quelle est la [situation](type_information) du [bon de reception](bon_reception) numéro N° [0061](numero_bon_reception) ?
+    - [situation](type_information) [bon de reception](bon_reception) n N° [0061](numero_bon_reception)
+    - [situation](type_information) [BR](bon_reception) N° [0061](numero_bon_reception)
+
+
+#****************************************************************************************************************
+- intent: savoir_demande_de_sortie_validee
+  examples: |
+    - Quelles sont les [demandes de sortie](demande_sortie) d'articles dont le statut est [validé](situation)
+    - Donne les demandes de sortie d'articles [validées](situation)
+    - [Demandes de sortie](demande_sortie) d'articles [validées](situation)
+    - Quelles sont les [demandes de sortie](demande_sortie) d'articles dont la situation est [validée](situation)
+    - Peux-tu donner les [demandes de sortie](demande_sortie) d'articles dont l'état est [validé](situation)
+    - [Demandes de sorties](demande_sortie) d'articles [validées](situation)
+    - [DS](demande_sortie) d'articles [validées](situation)
+    - Peux-tu donner les [DS](demande_sortie) d'articles dont l'état est [validé](situation)
+    - Quelles sont les [demandes de sortie](demande_sortie) [validées](situation) ?
+
+
+- intent: savoir_demande_de_sortie_a_valider
+  examples: |
+    - Quelles sont les [demandes de sortie](demande_sortie) d'articles dont le statut est [à valider](situation)
+    - Donne les demandes de sortie d'articles [à validers](situation)
+    - [Demandes de sortie](demande_sortie) d'articles [en attente de validation](situation)
+    - Quelles sont les [demandes de sortie](demande_sortie) d'articles dont la situation est [en attente de validation](situation)
+    - Peux-tu donner les [demandes de sortie](demande_sortie) d'articles dont l'état est [à valider](situation)
+    - [Demandes de sorties](demande_sortie) d'articles [en attente de validation](situation)
+    - [DS](demande_sortie) d'articles [à valider](situation)
+    - Peux-tu donner les [DS](demande_sortie) d'articles dont l'état est [a valider](situation)
+    - Quelles sont les [demandes de sortie](demande_sortie) [en attente de validation](situation) ?
+    - Quelles sont les [demandes de sorties](demande_sortie) [à valider](situation)?
+    - Les [DS](demande_sortie) [en attente de validation](situation)
+    - Les [DS](demande_sortie) [à valider](situation)
+
+
+#*****************************************RESPONSABLE MAINTENANCE**********************************
+- intent: etat_equipement_composantes
+  examples: |
+    - Quels sont les equipements [en service](etat_equipement)?
+    - Quels sont les  equipements [hors services](etat_equipement)?
+    - Montre les equipements en [fonctionnement dégradé](etat_equipement)
+    - Donne les equipements en [fonctionnement dégradé](etat_equipement).
+
+
+- intent: demander_historique_transfert_equipement
+  examples: |
+    - Quelle est l'historique de transfert de l'équipement [XXXX](identite_equipement)
+    - Peux-tu me donner l'historique de transfert de l'équipement [XXXX](identite_equipement) ?
+    - Montre-moi l'historique de transfert de l'équipement [XXXX](identite_equipement)
+    - Donne-moi l'historique de transfert de l'équipement [XXXX](identite_equipement)
+    - J'aimerais connaître l'historique de transfert de l'équipement [XXXX](identite_equipement)
+    - Quel est l'historique de transfert pour l'équipement [XXXX](identite_equipement) ?
+    - L'historique de transfert de l'équipement [XXXX](identite_equipement), s'il te plaît.
+    - Affiche l'historique de transfert de l'équipement [XXXX](identite_equipement)
+    - Quel est l'historique de transfert de l'équipement avec l'identifiant [XXXX](identite_equipement) ?
+    - Affiche les détails de transfert de l'équipement [XXXX](identite_equipement)
+    - Peux-tu me donner les details de transfert de l'équipement [XXXX](identite_equipement) ?
+
+
+- intent: demander_duree_interventions
+  examples: |
+    - Quelle est la durée des interventions de maintenance pour l'intervenant [NIAMPA](nom_intervenant) dans le mois de [janvier](mois) ?
+    - Quelle est la durée des interventions de maintenance pour l'intervenant [NIAMPA](nom_intervenant) dans le mois de [février](mois) ?
+    - Quelle est la durée des interventions de maintenance pour l'intervenant [NIAMPA](nom_intervenant) dans le mois de [mars](mois) ?
+    - Quelle est la durée des interventions de maintenance pour l'intervenant [NIAMPA](nom_intervenant) dans le mois de [avril](mois) ?
+    - Quelle est la durée des interventions de maintenance pour l'intervenant [NIAMPA](nom_intervenant) dans le mois de [mai](mois) ?
+    - Quelle est la durée des interventions de maintenance pour l'intervenant [NIAMPA](nom_intervenant) dans le mois de [juin](mois) ?
+    - Quelle est la durée des interventions de maintenance pour l'intervenant [NIAMPA](nom_intervenant) dans le mois de [juillet](mois) ?
+    - Quelle est la durée des interventions de maintenance pour l'intervenant [NIAMPA](nom_intervenant) dans le mois de [août](mois) ?
+    - Quelle est la durée des interventions de maintenance pour l'intervenant [NIAMPA](nom_intervenant) dans le mois de [septembre](mois) ?
+    - Quelle est la durée des interventions de maintenance pour l'intervenant [NIAMPA](nom_intervenant) dans le mois de [octobre](mois) ?
+    - Quelle est la durée des interventions de maintenance pour l'intervenant [NIAMPA](nom_intervenant) dans le mois de [novembre](mois) ?
+    - Quelle est la durée des interventions de maintenance pour l'intervenant [NIAMPA](nom_intervenant) dans le mois de [décembre](mois) ?
+
+
+- intent: demande_interventions_maintenance_preventive_date
+  examples: |
+    - Quelles sont les interventions de [maintenance préventive](type_information) prévues pour [cette semaine](periode_intervention) ?
+    - Quelles interventions de [maintenance préventive](type_information) sont programmées pour ce [mois](periode_intervention) ?
+    - Y a-t-il des maintenances préventives prévues pour [cette semaine](periode_intervention) ?
+    - Peux-tu me dire quelles interventions de [maintenance préventive](type_information) sont planifiées pour [la semaine prochaine](periode_intervention) ?
+    - Quels sont les travaux de [maintenance préventive](type_information) prévus pour ce [ce mois](periode_intervention) ?
+    - Existe-t-il des interventions de [maintenance préventive](type_information) prévues pour [le trimestre](periode_intervention) en cours ?
+    - Quelles sont les maintenances [préventives](type_information) planifiées pour [le mois prochain](periode_intervention) ?
+    - As-tu des informations sur les interventions de [maintenance préventive](type_information) pour [aujourd'hui](periode_intervention) ?
+    - Peux-tu me donner des détails sur les travaux de [maintenance préventive](type_information) prévus pour [la période estivale](periode_intervention) ?
 
 
 
-
-
-
-
-
-
-
-
+- regex: \b[A-Z][a-z]+\b
 
 
 - regex: numero_demande
   examples: |
     - \d{4}
+
+
+- regex: numero_bon_reception
+  examples: |
+    - \d{4}
+
 
 - synonym: validé
   examples: |
@@ -249,6 +387,11 @@ nlu:
     - accepté
     - accordé
     - validés
+    - validées
+    - approuvée
+    - approuvées
+
+
 
 - synonym: situation
   examples: |
@@ -256,19 +399,29 @@ nlu:
     - état actuel
     - progression
     - étape actuelle
+    - statut
 
 - synonym: fournisseur
   examples: |
     - vendeur
     - prestataire
 
-- synonym: délai de livraison
+- synonym: "délai de livraison"
   examples: |
-    - delai de livraison
-    - date de livraison
+    - "delai de livraison"
+    - "date de livraison"
 
-- synonym: demande d'achat
+- synonym: "demande d'achat"
   examples: |
     - DA
-    - D.A
-    - D.A.
+
+- synonym: "(bon_reception)"
+  examples: |
+    - BR
+    - "bon de reception"
+
+
+- synonym: "demandes de sortie"
+  examples: |
+    - DS
+    - "demande de sortie"

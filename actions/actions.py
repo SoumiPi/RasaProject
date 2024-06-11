@@ -1,6 +1,7 @@
-from typing import Any, Text, Dict, List
+
 from rasa_sdk import Action, Tracker
 from rasa_sdk.executor import CollectingDispatcher
+from typing import Any, Text, Dict, List
 
 class ExtractFoodEntity(Action):
     def name(self) -> Text:
@@ -61,20 +62,20 @@ class RepondrePeriodeIntervention(Action):
 
         periode_entity = next(tracker.get_latest_entity_values('periode'), None)
         if periode_entity:
-            if periode_entity == "aujourd'hui" or "jour":
-                dispatcher.utter_message(text=f"Vous intervenez {periode_entity} aux machines y et y et votre interventions consite à .......")
+            if periode_entity == "aujourd'hui":
+                dispatcher.utter_message(text=f"Vous intervenez {periode_entity} aux machines y et z et votre interventions consite à .......")
 
             if periode_entity == "mois":
                 dispatcher.utter_message(text=f"Vous devez intervenir ce {periode_entity} niveau des machines y et y et votre interventions consite à .......")
 
             if periode_entity == "semaine":
-                dispatcher.utter_message(text=f"Vous intervenez cette {periode_entity} aux machines y et y et votre interventions consite à .......")
+                dispatcher.utter_message(text=f"Vous intervenez cette {periode_entity} aux machines y et x et votre interventions consite à .......")
 
             if periode_entity == "demain":
-                dispatcher.utter_message(text=f" {periode_entity}, vous intervenez aux machines y et y et votre interventions consite à .......")
+                dispatcher.utter_message(text=f" {periode_entity}, vous intervenez aux machines y et m1 et votre interventions consite à .......")
 
         else:
-            dispatcher.utter_message(text="Désolé, je n'arrive pas à extraire la période d'intervention.")
+            dispatcher.utter_message(text="Désolé, veuillez préciser la période d'intervention.")
 
         return []
 
@@ -158,10 +159,10 @@ class RepondreDemandeAchat(Action):
             return []
 
         # Simulated responses for demonstration purposes
-        if type_info == "délai de livraison":
+        if type_info == "délai de livraison" or "delai de livraison" or "date de livraison" or "livrée":
             response = f"Le délai de livraison pour la demande d'achat numéro {numero_demande} est 12-05-2024."
 
-        elif type_info == "statut":
+        elif type_info == "situation":
             response = f"Le statut actuel de la demande d'achat numéro {numero_demande} est 'En cours de traitement'."
 
         elif type_info == "fournisseur":
@@ -199,7 +200,7 @@ class ActionDemanderSituationDemandeAchatValidee(Action):
         return []
 
 
-    #delai de livraison
+#delai de livraison des bons de commandes
 
 class ActionBonsCommandeDateLivraison(Action):
     def name(self) -> Text:
@@ -220,6 +221,219 @@ class ActionBonsCommandeDateLivraison(Action):
 
         else:
             response = "Désolé, je n'ai pas compris la date ou la période de livraison spécifiée."
+
+        dispatcher.utter_message(text=response)
+        return []
+
+
+#*****************MAGASINIES-*******************************************************************************************************************
+
+#action sur les bons de livraison en retard
+class ActionDemanderBonReceptionRetard(Action):
+
+    def name(self) -> Text:
+        return "action_demander_bon_reception_retard"
+
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+
+        bon_reception_entities = list(tracker.get_latest_entity_values("bon_reception"))
+        periode_livraison_entity = next(tracker.get_latest_entity_values("periode_livraison"), None)
+
+        if bon_reception_entities and periode_livraison_entity:
+            bon_reception_str = ", ".join(bon_reception_entities)
+            periode_livraison_str = periode_livraison_entity
+            response = f"Les {bon_reception_str} sont en {periode_livraison_str} sont XYZ."
+        else:
+            response = "Je suis désolé, je n'ai pas pu trouver toutes les informations nécessaires. Pouvez-vous reformuler votre question ?"
+
+        dispatcher.utter_message(text=response)
+
+        return []
+
+
+#Action demander la situation de bons de reception
+class ActionDemanderStatutBonReception(Action):
+
+    def name(self) -> Text:
+        return "action_demander_statut_bon_reception"
+
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+
+        bon_reception_entity = next(tracker.get_latest_entity_values("bon_reception"), None)
+        numero_bon_reception_entity = next(tracker.get_latest_entity_values("numero_bon_reception"), None)
+        type_information_entity = next(tracker.get_latest_entity_values("type_information"), None)
+
+        if bon_reception_entity and numero_bon_reception_entity and type_information_entity:
+            response = f"La {type_information_entity} du {bon_reception_entity} numéro {numero_bon_reception_entity} est 'Validée'."
+        else:
+            response = "Je suis désolé, je n'ai pas pu trouver toutes les informations nécessaires. Pouvez-vous reformuler votre question ?"
+
+        dispatcher.utter_message(text=response)
+
+        return []
+
+
+#Reondre: savoir les demande de sortie validées
+class ActionSavoirDemandeDeSortieValidee(Action):
+
+    def name(self) -> Text:
+        return "action_savoir_demande_de_sortie_validee"
+
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+
+        demande_sortie_entities = list(tracker.get_latest_entity_values("demande_sortie"))
+        situation_entity = next(tracker.get_latest_entity_values("situation"), None)
+
+        if demande_sortie_entities and situation_entity:
+            demande_sortie_str = ", ".join(demande_sortie_entities)
+            response = f"Les demandes de sortie d'articles dont la situation est {situation_entity} sont les demandes XYZ."
+        else:
+            response = "Je suis désolé, je n'ai pas pu trouver toutes les informations nécessaires. Pouvez-vous reformuler votre question ?"
+
+        dispatcher.utter_message(text=response)
+
+        return []
+
+
+#Savoir les bons de commande en retard
+class ActionSavoirCommandesRetardLivraison(Action):
+
+    def name(self) -> Text:
+        return "action_savoir_commandes_retard_livraison"
+
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+
+        # As this is a static response action, we provide a static message.
+        dispatcher.utter_message(text="Voici la liste des commandes en retard de livraison: C001, C002, C003.")
+
+        return []
+
+
+
+
+#************************************************************************************************
+
+class ActionEtatEquipementComposantes(Action):
+
+    def name(self) -> Text:
+        return "action_etat_equipement_composantes"
+
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+
+        etat_equipement = next(tracker.get_latest_entity_values("etat_equipement"), None)
+
+        if etat_equipement:
+            response = f"Les équipements en état '{etat_equipement}' sont les suivants: ..."
+        else:
+            response = "Je n'ai pas pu trouver l'état des équipements demandé. Pouvez-vous reformuler votre question ?"
+
+        dispatcher.utter_message(text=response)
+        return []
+
+
+#connaitre l'historique de transfert equipement
+class ActionDemanderHistoriqueTransfertEquipement(Action):
+
+    def name(self) -> Text:
+        return "action_demander_historique_transfert_equipement"
+
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+
+        identite_equipement = next(tracker.get_latest_entity_values("identite_equipement"), None)
+
+        if identite_equipement:
+            response = f"L'historique de transfert pour l'équipement '{identite_equipement}' est le suivant: ..."
+        else:
+            response = "Je n'ai pas pu trouver l'identifiant de l'équipement. Pouvez-vous reformuler votre question ?"
+
+        dispatcher.utter_message(text=response)
+        return []
+
+
+#Connaitre la durée des interventions d'un intervenant
+class ActionDemanderDureeInterventions(Action):
+
+    def name(self) -> Text:
+        return "action_demander_duree_interventions"
+
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+
+        nom_intervenant = next(tracker.get_latest_entity_values("nom_intervenant"), None)
+        mois = next(tracker.get_latest_entity_values("mois"), None)
+
+        if nom_intervenant and mois:
+            response = f"La durée des interventions de maintenance pour l'intervenant '{nom_intervenant}' dans le mois de '{mois}' est de X heures."
+        else:
+            response = "Je n'ai pas pu trouver les informations nécessaires. Pouvez-vous reformuler votre question ?"
+
+        dispatcher.utter_message(text=response)
+        return []
+
+
+
+
+#Savoir les demande de sortie à valider ou en attente de validation
+class ActionSavoirDemandeDeSortieAValider(Action):
+
+    def name(self) -> Text:
+        return "action_savoir_demande_de_sortie_a_valider"
+
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+
+        # Extraction des entités pertinentes
+        demande_sortie = next(tracker.get_latest_entity_values("demande_sortie"), None)
+        situation = next(tracker.get_latest_entity_values("situation"), None)
+
+        response = "h "
+
+        # Réponse en fonction des entités extraites
+        expression_demande_sortie = ["demandes de sortie", "demande de sorties", "demandes de sorties", "demande de sortie", "DS"]
+        if demande_sortie and situation:
+            if demande_sortie in expression_demande_sortie:
+                response = f"Les demandes de sortie d'articles en situation '{situation}' sont les suivantes : ... "
+        else:
+            response = "Je n'ai pas pu bien comprendre votre requette. Pouvez-vous reformuler votre question ?"
+
+        dispatcher.utter_message(text=response)
+        return []
+
+
+
+
+#Savoir les interventions de maintenance préventive plannifiées dans un intervelle de temps à comptyer d'aujourd'hui
+class ActionInterventionsMaintenancePreventive(Action):
+    def name(self) -> Text:
+        return "action_interventions_maintenance_preventive"
+
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+
+        periode_intervention = next(tracker.get_latest_entity_values("periode_intervention"), None)
+        type_information = next(tracker.get_latest_entity_values("type_information"), None)
+
+        if periode_intervention and type_information:
+            response = f"Les interventions de maintenance préventive prévues pour {periode_intervention} sont {type_information} des equipement X Y Z, etc."
+        elif periode_intervention:
+            response = f"Il n'y a pas d'informations disponibles pour les interventions de maintenance préventive prévues pour {periode_intervention}."
+        else:
+            response = "Je suis désolé, je n'ai pas compris votre demande. Pouvez-vous reformuler votre question ?"
 
         dispatcher.utter_message(text=response)
         return []

@@ -19,10 +19,19 @@ intents:
   - debut_bons_de_travail
   - bons_de_travail_retard
   - demander_delai_livraison
-  - demander_statut_demande
+  - demander_statut_demande_achat
   - demander_fournisseur
   - demander_situation_demande_achat_validee
   - bons_commande_date_livraison
+  - demander_bon_reception_retard
+  - demander_statut_bon_reception
+  - savoir_demande_de_sortie_validee
+  - savoir_commandes_retard_livraison
+  - demander_duree_interventions
+  - demander_historique_transfert_equipement
+  - etat_equipement_composantes
+  - savoir_demande_de_sortie_a_valider
+  - demande_interventions_maintenance_preventive_date
 
 
 entities:
@@ -35,8 +44,14 @@ entities:
   - situation
   - periode_demande
   - periode_livraison
-
-
+  - bon_reception
+  - demande_sortie
+  - numero_bon_reception
+  - etat_equipement
+  - identite_equipement
+  - nom_intervenant
+  - mois
+  - periode_intervention
 
 responses:
   utter_salutations:
@@ -90,6 +105,16 @@ actions:
   - action_repondre_demande_achat
   - action_demander_situation_demande_achat_validee
   - action_bons_commande_date_livraison
+  - action_demander_bon_reception_retard
+  - action_demander_statut_bon_reception
+  - action_savoir_demande_de_sortie_validee
+  - action_savoir_commandes_retard_livraison
+  - action_etat_equipement_composantes
+  - action_demander_historique_transfert_equipement
+  - action_demander_duree_intervention
+  - action_demander_duree_interventions
+  - action_savoir_demande_de_sortie_a_valider
+  - action_interventions_maintenance_preventive
 
 
 

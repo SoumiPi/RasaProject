@@ -1,0 +1,18 @@
+[
+  {
+    "name": "identite_equipement",
+    "pattern": "[A-Za-zÀ-ÖØ-öø-ÿ]+"
+  },
+  {
+    "name": "nom_intervenant",
+    "pattern": "[A-Za-zÀ-ÖØ-öø-ÿ]+"
+  },
+  {
+    "name": "numero_bon_reception",
+    "pattern": "\\d{4}"
+  },
+  {
+    "name": "numero_demande",
+    "pattern": "\\d{4}"
+  }
+]

@@ -1,0 +1,10 @@
+[
+  {
+    "name": "numero_bon_reception",
+    "pattern": "\\d{4}"
+  },
+  {
+    "name": "numero_demande",
+    "pattern": "\\d{4}"
+  }
+]

@@ -91,7 +91,7 @@ stories:
 
 - story: Connnaitre le founisseur et le statut d'une demande d'achat avec le numero de la demande d'achat
   steps:
-    - intent: demander_statut_demande
+    - intent: demander_statut_demande_achat
     - action: action_repondre_demande_achat
 
 - story: Connnaitre le founisseur et le statut d'une demande d'achat avec le numero de la demande d'achat
@@ -110,3 +110,54 @@ stories:
   steps:
     - intent: bons_commande_date_livraison
     - action: action_bons_commande_date_livraison
+
+
+# Histooire des bons de reception
+- story: Demander bon de réception en retard
+  steps:
+    - intent: demander_bon_reception_retard
+    - action: action_demander_bon_reception_retard
+
+- story: Demander le statut d'un bon de réception
+  steps:
+    - intent: demander_statut_bon_reception
+    - action: action_demander_statut_bon_reception
+
+- story: Savoir demande de sortie validée
+  steps:
+    - intent: savoir_demande_de_sortie_validee
+    - action: action_savoir_demande_de_sortie_validee
+
+
+- story: demander les commandes en retard de livraison
+  steps:
+  - intent: savoir_commandes_retard_livraison
+  - action: action_savoir_commandes_retard_livraison
+
+
+- story: etat des equipements
+  steps:
+  - intent: etat_equipement_composantes
+  - action: action_etat_equipement_composantes
+
+- story: historique transfert equipement
+  steps:
+  - intent: demander_historique_transfert_equipement
+  - action: action_demander_historique_transfert_equipement
+
+- story: duree interventions maintenance
+  steps:
+  - intent: demander_duree_interventions
+  - action: action_demander_duree_interventions
+
+
+- story: Demander les demandes de sortie à valider
+  steps:
+  - intent: savoir_demande_de_sortie_a_valider
+  - action: action_savoir_demande_de_sortie_a_valider
+
+
+- story: Demande d'interventions de maintenance préventive
+  steps:
+    - intent: demande_interventions_maintenance_preventive_date
+    - action: action_interventions_maintenance_preventive
