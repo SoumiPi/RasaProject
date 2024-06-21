@@ -1,0 +1,79 @@
+/* Styles pour le bouton de chat */
+.chat-sign-button {
+    width: 50px;
+    height: 50px;
+    font-size: 24px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Styles pour la fenêtre de chat */
+#chat-widget {
+    position: fixed;
+    bottom: 100px;
+    right: 20px;
+    height: 500;
+    width: 800px; /* Ajuster la largeur selon vos besoins */
+    max-width: calc(100% - 40px); /* Limiter la largeur maximale */
+    background-color: #ffffff;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    overflow-y: auto; /* Ajouter un défilement vertical si nécessaire */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.chat-widget-messages {
+    max-height: 400px; /* Ajuster la hauteur maximale des messages */
+    overflow-y: auto;
+    padding: 10px;
+}
+
+/* Styles pour les containers de messages */
+.message-container {
+    display: flex;
+    align-items: flex-start;
+    margin: 10px 0;
+}
+
+.message-container img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+/* Styles pour les messages de l'utilisateur et de l'assistant */
+.user-message {
+    background-color: #e6e6e6;
+    color: #333;
+    padding: 10px;
+    border-radius: 10px;
+    clear: both;
+    float: left; /* Aligner à gauche */
+    text-align: left;
+    border: 1px solid #ccc;
+    max-width: 90%; /* Largeur maximale pour le message */
+}
+
+.assistant-message {
+    background-color: #6166a3;
+    color: #fff;
+    padding: 10px;
+    border-radius: 10px;
+    clear: both;
+    float: right; /* Aligner à droite */
+    text-align: left;
+    border: 1px solid #4e4e8f;
+    max-width: 90%; /* Largeur maximale pour le message */
+}
+
+/* Style pour les boutons de réponse */
+.chat-button {
+    background-color: #6166a3;
+    color: #fff;
+    border: none;
+    padding: 5px;
+    margin: 5px 0 0 5px;
+    border-radius: 5px;
+    cursor: pointer;
+}
