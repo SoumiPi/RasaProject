@@ -1,0 +1,30 @@
+[
+  {
+    "name": "nom_intervenant",
+    "pattern": "\\b[A-Z][a-z]+ [A-Z][a-z]+-?[A-Z]?[a-z]*\\b"
+  },
+  {
+    "name": "nom_intervenant",
+    "pattern": "\\b[A-Z][a-z]+ [A-Z][a-z]+\\b"
+  },
+  {
+    "name": "nom_intervenant",
+    "pattern": "\\b[A-Z][a-z]+ [A-Z]\\. [A-Z][a-z]+\\b"
+  },
+  {
+    "name": "nom_intervenant",
+    "pattern": "\\b[A-Z][a-z]+ de [A-Z][a-z]+\\b"
+  },
+  {
+    "name": "nom_intervenant",
+    "pattern": "\\b[A-Z][a-z]+-[A-Z][a-z]+\\b"
+  },
+  {
+    "name": "numero_bon_reception",
+    "pattern": "\\d{4}"
+  },
+  {
+    "name": "numero_demande",
+    "pattern": "\\d{4}"
+  }
+]
