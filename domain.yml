@@ -8,20 +8,17 @@ intents:
   - denie
   - je_suis_robot
   - joyeux_salutations
-  - order_pizza
-  - order_food
-  - inform_food
   - thanks
   - ajouter_fournisseur
   - ajouter_intervenant
   - identifier_ses_interventions
-  - connaitre_interventions_prioritaire
+  - connaitre_interventions_prioritaires
   - debut_bons_de_travail
   - bons_de_travail_retard
-  - demander_delai_livraison
+  - demander_delai_livraison_demande_achat
   - demander_statut_demande_achat
-  - demander_fournisseur
-  - demander_situation_demande_achat_validee
+  - demander_fournisseur_demande_achat
+  # - demander_situation_demande_achat_validee
   - bons_commande_date_livraison
   - demander_bon_reception_retard
   - demander_statut_bon_reception
@@ -32,10 +29,15 @@ intents:
   - etat_equipement_composantes
   - savoir_demande_de_sortie_a_valider
   - demande_interventions_maintenance_preventive_date
+  - connaitre_tournees_semaine_mois
+  - demander_reaprovisionnement_article
+  - demander_activité_sans_bon_mois_semaine
+  - demander_activité_avec_bon_mois_semaine
+  - demandes_achat_periode_livraison
+
 
 
 entities:
-  - nourriture
   - periode
   - priorite
   - date_debut_BT
@@ -50,8 +52,17 @@ entities:
   - etat_equipement
   - identite_equipement
   - nom_intervenant
-  - mois
+  - mois_intervention
   - periode_intervention
+  - tournee
+  - article
+  - periode_tournee
+  - période_activité
+  - activité
+  - priority_periode
+  - demande_achat
+
+
 
 responses:
   utter_salutations:
@@ -91,19 +102,34 @@ responses:
           payload: "https://formation.maintex-test.net/actors/member/member_new"
 
 
+  utter_periode_non_reconnue:
+    - text: "Désolé, je n'ai pas compris la période spécifiée."
+
+
+slots:
+  nom_intervenant:
+    type: text
+    influence_conversation: false
+    mappings:
+      - type: from_entity
+        entity: nom_intervenant
+
+
+
+
+
+
 
 actions:
-  - action_extract_food_entity
-  - action_order_food
-  - action_confirm_order
+
   - utter_ajout_fournisseur
   - utter_ajout_intervenant
-  - action_interventions_periode
-  - action_interventions_priorite
+  - action_identifier_interventions
+  - action_identifier_interventions_priorite
   - action_debut_bons_de_travail
   - action_bons_de_travail_retard
-  - action_repondre_demande_achat
   - action_demander_situation_demande_achat_validee
+  - action_demandes_achat_periode_livraison
   - action_bons_commande_date_livraison
   - action_demander_bon_reception_retard
   - action_demander_statut_bon_reception
@@ -115,6 +141,13 @@ actions:
   - action_demander_duree_interventions
   - action_savoir_demande_de_sortie_a_valider
   - action_interventions_maintenance_preventive
+  - action_demander_fournisseur_demande_achat
+  - action_demande_situation_demande_achat
+  - action_demande_delai_livraison_demande_achat
+  - action_demander_tournees_semaine_mois
+  - action_demander_reaprovisionnement_article
+  - action_demander_activite_mois_semaine
+  - action_initialize_role_slot
 
 
 
