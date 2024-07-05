@@ -6,6 +6,16 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    background-color: #0c1237;
+    color: white; /* Couleur du texte */
+    border: none; /* Pas de bordure */
+    cursor: pointer; /* Curseur en forme de main */
+}
+
+
+.chat-sign-button:hover {
+    background-color: #0a102b; /* Couleur de fond lors du survol */
+    color: white; /* Couleur du texte lors du survol */
 }
 
 /* Styles pour la fenêtre de chat */
@@ -13,10 +23,9 @@
     position: fixed;
     bottom: 100px;
     right: 20px;
-    height: 500;
-    width: 800px; /* Ajuster la largeur selon vos besoins */
+    width: 1200px; /* Ajuster la largeur selon vos besoins */
     max-width: calc(100% - 40px); /* Limiter la largeur maximale */
-    background-color: #ffffff;
+    background-color: #9a9a9afe; /* Couleur de fond du chat  #f0f0f0*/
     border: 1px solid #ccc;
     border-radius: 10px;
     overflow-y: auto; /* Ajouter un défilement vertical si nécessaire */
@@ -36,44 +45,107 @@
     margin: 10px 0;
 }
 
+/* Styles pour les images de profil */
 .message-container img {
     width: 40px;
     height: 40px;
-    border-radius: 50%;
+    border-radius: 50%; /* Forme ronde pour l'image de profil */
     margin-right: 10px;
+    border: 2px solid #ccc;
 }
+
 /* Styles pour les messages de l'utilisateur et de l'assistant */
 .user-message {
-    background-color: #e6e6e6;
+    background-color: #ffffff; /* Couleur de fond pour les messages utilisateur */
     color: #333;
     padding: 10px;
-    border-radius: 10px;
+    border-radius: 15px; /* Coins arrondis */
     clear: both;
-    float: left; /* Aligner à gauche */
+    float: left; /* Alignement à gauche */
     text-align: left;
-    border: 1px solid #ccc;
+    border: 1px solid #3949ab;
     max-width: 90%; /* Largeur maximale pour le message */
 }
 
 .assistant-message {
-    background-color: #6166a3;
-    color: #fff;
+    background-color: #d2d4dd; /* Couleur de fond pour les messages du bot */
+    color: #13133e;
     padding: 10px;
-    border-radius: 10px;
+    border-radius: 15px; /* Coins arrondis */
     clear: both;
-    float: right; /* Aligner à droite */
+    float: right; /* Alignement à droite */
     text-align: left;
-    border: 1px solid #4e4e8f;
+    border: 1px solid #3949ab;
     max-width: 90%; /* Largeur maximale pour le message */
 }
 
 /* Style pour les boutons de réponse */
 .chat-button {
-    background-color: #6166a3;
+
     color: #fff;
     border: none;
-    padding: 5px;
-    margin: 5px 0 0 5px;
+    padding: 8px 15px;
+    margin: 5px 0;
     border-radius: 5px;
     cursor: pointer;
 }
+
+
+.custom-header {
+    background-color: #0c1237; /* Couleur de fond personnalisée */
+    color: white; /* Couleur du texte */
+    border: none; /* Pas de bordure */
+}
+
+.typing-dots {
+    display: inline-block;
+    height: 10px;
+}
+
+.dot {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: #6166a3;
+    margin: 0 2px;
+    opacity: 0;
+    animation: dot-blink 1.4s infinite;
+}
+
+.dot:nth-child(1) {
+    animation-delay: 0s;
+}
+
+.dot:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.dot:nth-child(3) {
+    animation-delay: 0.4s;
+}
+
+@keyframes dot-blink {
+    0%, 80%, 100% {
+        opacity: 0;
+    }
+    40% {
+        opacity: 1;
+    }
+}
+
+/* Style pour le bouton d'envoi du message */
+#chat-widget-send-button {
+    background-color: #13133e; /* Couleur de fond */
+    color: #fff; /* Couleur du texte et de l'icône */
+    border: none; /* Pas de bordure */
+    padding: 8px 15px; /* Padding pour le bouton */
+    border-radius: 5px; /* Coins arrondis */
+    cursor: pointer; /* Curseur pointeur */
+}
+
+/* Changer la couleur de fond au survol */
+#chat-widget-send-button:hover {
+    background-color: #0e0e32; /* Couleur de fond au survol */
+}
+
