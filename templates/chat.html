@@ -14,15 +14,16 @@
             <i class="fas fa-robot"></i>
         </button>
 
-        <div id="chat-widget" class="card position-fixed shadow d-none" style="bottom: 100px; right: 20px; width: 600px;">
-            <div class="card-header bg-primary text-white">
-                Chatbot
+        <div id="chat-widget" class="card position-fixed shadow d-none">
+            <div class="card-header custom-header">
+                <span class="bot-profile">ASSISTANT-MAINTEX</span>
                 <button id="chat-widget-close-button" type="button" class="btn-close float-end" aria-label="Close"></button>
             </div>
             <div class="card-body chat-widget-messages" id="chat-widget-messages">
             </div>
-            <div class="card-footer">
-                <input type="text" class="form-control" id="chat-widget-input" placeholder="Taper votre message...">
+            <div class="card-footer d-flex">
+                <input type="text" class="form-control me-2" id="chat-widget-input" placeholder="Taper votre message...">
+                <button id="chat-widget-send-button" class="btn btn-primary"><i class="fas fa-paper-plane"></i></button>
             </div>
         </div>
     </div>
