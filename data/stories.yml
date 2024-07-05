@@ -33,17 +33,7 @@ stories:
     - intent: affirmation
     - action: utter_affirmation
 
-- story: commander de la pizza
-  steps:
-    - intent: order_pizza
-    - action: action_extract_food_entity
 
-- story: order my food
-  steps:
-    - intent: order_food
-    - action: action_order_food
-    - intent: inform_food
-    - action: action_confirm_order
 
 #fournisseur
 
@@ -60,16 +50,63 @@ stories:
 
 #pour savoir les interventions a une periode précise
 
-- story: savoir les interventions que je dois faire sur une periode donnée
+- story: intervention_aujourd_hui
   steps:
     - intent: identifier_ses_interventions
-    - action: action_interventions_periode
+      entities:
+        - periode: aujourd'hui
+    - action: action_identifier_interventions
+
+- story: intervention_ce_mois
+  steps:
+    - intent: identifier_ses_interventions
+      entities:
+        - periode: ce mois
+    - action: action_identifier_interventions
+
+- story: intervention_cette_semaine
+  steps:
+    - intent: identifier_ses_interventions
+      entities:
+        - periode: cette semaine
+    - action: action_identifier_interventions
+
+- story: intervention_demain
+  steps:
+    - intent: identifier_ses_interventions
+      entities:
+        - periode: demain
+    - action: action_identifier_interventions
+
+- story: periode_non_reconnue
+  steps:
+    - intent: identifier_ses_interventions
+    - action: utter_periode_non_reconnue
+
+
 
 # savoir quelles sont les interventions prioritaires
-- story: savoir les interventions que je dois faire sur une periode donnée
+
+# - story: demander_interventions_tres_urgentes
+#   steps:
+#     - intent: connaitre_interventions_prioritaires
+#     - action: action_identifier_interventions_priorite
+
+
+- story: intervention_urgentes
   steps:
-    - intent: connaitre_interventions_prioritaire
-    - action: action_interventions_priorite
+    - intent: connaitre_interventions_prioritaires
+      entities:
+        - priorite: urgentes
+    - action: action_identifier_interventions_priorite
+
+- story: intervention_tres_urgentes
+  steps:
+    - intent: connaitre_interventions_prioritaires
+      entities:
+        - priorite: très urgentes
+    - action: action_identifier_interventions_priorite
+
 
 #Connaitre les date debut des bons de travail
 - story: Connaitre les date debut des bons de travail
@@ -83,28 +120,12 @@ stories:
     - intent: bons_de_travail_retard
     - action: action_bons_de_travail_retard
 
-#Connaitre le founisseur et le statut d'une demande d'achat avec le numero de la demande d'achat
-- story: Connnaitre le founisseur et le statut d'une demande d'achat avec le numero de la demande d'achat
-  steps:
-    - intent: demander_delai_livraison
-    - action: action_repondre_demande_achat
 
-- story: Connnaitre le founisseur et le statut d'une demande d'achat avec le numero de la demande d'achat
-  steps:
-    - intent: demander_statut_demande_achat
-    - action: action_repondre_demande_achat
-
-- story: Connnaitre le founisseur et le statut d'une demande d'achat avec le numero de la demande d'achat
-  steps:
-    - intent: demander_fournisseur
-    - action: action_repondre_demande_achat
-
-
-#histoire sur la demande de la situation des demades d'achat validée
-- story: demander_situation_demande_achat_validee
-  steps:
-    - intent: demander_situation_demande_achat_validee
-    - action: action_demander_situation_demande_achat_validee
+# #histoire sur la demande de la situation des demades d'achat validée
+# - story: demander_situation_demande_achat_validee
+#   steps:
+#     - intent: demander_situation_demande_achat_validee
+#     - action: action_demander_situation_demande_achat_validee
 
 - story: connaitre le delai de livraison de d'un bon de commande
   steps:
@@ -161,3 +182,138 @@ stories:
   steps:
     - intent: demande_interventions_maintenance_preventive_date
     - action: action_interventions_maintenance_preventive
+
+
+
+#tournées
+
+- story: Demander tournées pour cette semaine
+  steps:
+    - intent: connaitre_tournees_semaine_mois
+      entities:
+        - periode_tournee: cette semaine
+    - action: action_demander_tournees_semaine_mois
+
+- story: Demander tournées pour la semaine prochaine
+  steps:
+    - intent: connaitre_tournees_semaine_mois
+      entities:
+        - periode_tournee: semaine prochaine
+    - action: action_demander_tournees_semaine_mois
+
+- story: Demander tournées pour ce mois
+  steps:
+    - intent: connaitre_tournees_semaine_mois
+      entities:
+        - periode_tournee: ce mois
+    - action: action_demander_tournees_semaine_mois
+
+- story: Demander tournées pour le mois prochain
+  steps:
+    - intent: connaitre_tournees_semaine_mois
+      entities:
+        - periode_tournee: mois prochain
+    - action: action_demander_tournees_semaine_mois
+
+
+
+- story: demander réapprovisionnement article sans entité
+  steps:
+  - intent: demander_reaprovisionnement_article
+  - action: action_demander_reaprovisionnement_article
+
+
+#******************************************************************DEMANDES D'ACHAT*************************************************************************
+#Savoir les DA dans le semaine, semaine suivante, ce mois, mois suivant
+- story: Demande d'achat cette semaine
+  steps:
+    - intent: demandes_achat_periode_livraison
+      entities:
+        - periode_livraison: cette semaine
+    - action: action_demandes_achat_periode_livraison
+
+
+- story: Demande d'achat ce mois-ci
+  steps:
+    - intent: demandes_achat_periode_livraison
+      entities:
+        - periode_livraison: ce mois
+    - action: action_demandes_achat_periode_livraison
+
+- story: Demande d'achat semaine prochaine
+  steps:
+    - intent: demandes_achat_periode_livraison
+      entities:
+        - periode_livraison: semaine prochaine
+    - action: action_demandes_achat_periode_livraison
+
+- story: Demande d'achat mois prochain
+  steps:
+    - intent: demandes_achat_periode_livraison
+      entities:
+        - periode_livraison: mois prochain
+    - action: action_demandes_achat_periode_livraison
+
+
+
+#Connaitre le founisseur et le statut d'une demande d'achat avec le numero de la demande d'achat
+- story: Connaître le délai de livraison des demandes d'achat
+  steps:
+    - intent: demander_delai_livraison_demande_achat
+      entities:
+        - type_information: délai de livraison
+        - type_information: date de livraison
+        - demande_achat: demande d'achat
+    - action: action_demande_delai_livraison_demande_achat
+
+- story: Connaître le statut de la demande d'achat
+  steps:
+    - intent: demander_statut_demande_achat
+      entities:
+        - type_information: situation
+        - type_information: statut
+        - demande_achat: demande d'achat
+    - action: action_demande_situation_demande_achat
+
+- story: Connaître le fournisseur d'une demande d'achat avec le numéro de la demande
+  steps:
+    - intent: demander_fournisseur_demande_achat
+      entities:
+        - type_information: fournisseur
+        - demande_achat: demande d'achat
+    - action: action_demander_fournisseur_demande_achat
+
+
+
+#************************************ACTIVITE*******************************************************
+- story: demander activités de la semaine sans bon
+  steps:
+  - intent: demander_activité_sans_bon_mois_semaine
+    entities:
+    - période_activité: cette semaine
+    - activité: activités sans bon
+  - action: action_demander_activite_mois_semaine
+
+- story: demander activités du mois sans bon
+  steps:
+  - intent: demander_activité_sans_bon_mois_semaine
+    entities:
+    - période_activité: ce mois
+    - activité: activités sans bon
+  - action: action_demander_activite_mois_semaine
+
+- story: demander activités de la semaine avec bon
+  steps:
+  - intent: demander_activité_avec_bon_mois_semaine
+    entities:
+    - période_activité: cette semaine
+    - activité: activités
+  - action: action_demander_activite_mois_semaine
+
+- story: demander activités du mois avec bon
+  steps:
+  - intent: demander_activité_avec_bon_mois_semaine
+    entities:
+    - période_activité: ce mois
+    - activité: activités
+  - action: action_demander_activite_mois_semaine
