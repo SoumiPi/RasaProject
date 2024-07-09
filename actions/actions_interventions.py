@@ -2,8 +2,7 @@ from rasa_sdk import Action, Tracker
 from rasa_sdk.executor import CollectingDispatcher
 from typing import Any, Text, Dict, List
 from connexion_db import create_connection
-from mysql.connector import connect, Error
-
+from get_user_rule_token import get_user_rule_from_token
 
 
 class RepondrePeriodeIntervention(Action):
@@ -14,12 +13,44 @@ class RepondrePeriodeIntervention(Action):
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
 
+        # # Récupération du token JWT depuis les métadonnées du tracker
+        # token = tracker.latest_message.get('metadata', {}).get('token')
+        # user_role = get_user_rule_from_token(token)
+
+        # # Vérification du rôle pour autoriser l'action
+        # if user_role not in ['Technicine de Maintenance', 'Responsable de Maintenance', 'Administrateur' ]:  # Ajoutez les rôles autorisés ici
+        #     dispatcher.utter_message(text="Désolé, vous n'avez pas le droit d'accès à ces informations.")
+        #     return []
+
+        user_id = 15
         try:
             # Connexion à la base de données
             conn = create_connection()
 
             if conn:
                 cursor = conn.cursor()
+
+                sql_query = f"""
+                    SELECT up.user_profile_id
+                    FROM user u
+                    JOIN user_company uc ON u.user_id = uc.user_company_user_id
+                    JOIN user_profile up ON uc.user_company_profile_id = up.user_profile_id
+                    WHERE u.user_id = {user_id}
+                """
+                cursor.execute(sql_query)
+                row = cursor.fetchone()
+
+                if row:
+                    user_profile_id = row[0]
+
+                    # Vérification si l'utilisateur a le bon profil
+                    if user_profile_id != 7:
+                        dispatcher.utter_message(text="Désolé, votre profil ne vous permet pas d'avoir accès à ces informations")
+                        return []
+                else:
+                    dispatcher.utter_message(text="Utilisateur non trouvé.")
+                    return []
+
 
                 # Extraction de l'entité 'periode' depuis le tracker
                 periode_entity = next(tracker.get_latest_entity_values('periode'), None)
@@ -350,6 +381,13 @@ class RepondreDebutBonTravail(Action):
     def run(self, dispatcher: CollectingDispatcher,
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+        token = tracker.latest_message.get('metadata', {}).get('token')
+        user_role = get_user_rule_from_token(token)
+
+        # Vérification du rôle pour autoriser l'action
+        if user_role not in ['Technicine de Maintenance', 'Responsable de Maintenance', 'Administrateur' ]:  # Ajoutez les rôles autorisés ici
+            dispatcher.utter_message(text="Désolé, vous n'avez pas le droit d'accès à ces informations.")
+            return []
 
         try:
             # Connexion à la base de données
@@ -501,6 +539,8 @@ class ActionDemanderTournees(Action):
     def run(self, dispatcher: CollectingDispatcher,
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+
+
 
         try:
             # Connexion à la base de données

@@ -1,156 +1,104 @@
-# #import jwt
+#import jwt
 from typing import Text, Dict, Any, List
 from rasa_sdk import Action, Tracker
 from rasa_sdk.executor import CollectingDispatcher
 from connexion_db import create_connection
+import mysql
+# from get_user_rule_token import get_user_rule_from_token
+        # Récupération du token JWT depuis les métadonnées du tracker
+        # token = tracker.latest_message.get('metadata', {}).get('token')
+        # user_role = get_user_rule_from_token(token)
+        # print(f"Rôle de l'utilisateur : {user_role}")
 
-# JWT_SECRET_KEY = '123456789'
-
-# def get_user_role_from_token(token):
-#     """Decode the JWT token to get the user role."""
-#     try:
-#         decoded = jwt.decode(token, JWT_SECRET_KEY, algorithms=['HS256'])
-#         return decoded.get('role')
-#     except jwt.ExpiredSignatureError:
-#         return None
-#     except jwt.InvalidTokenError:
-#         return None
-
-# class ActionDemandeAchatFournisseur(Action):
-#     def name(self) -> Text:
-#         return "action_demander_fournisseur_demande_achat"
-
-#     def run(self, dispatcher: CollectingDispatcher,
-#             tracker: Tracker,
-#             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
-
-#         # Récupération du token JWT depuis les métadonnées du tracker
-#         token = tracker.latest_message.get('metadata', {}).get('token')
-#         user_role = get_user_role_from_token(token)
-#         print(f"Rôle de l'utilisateur : {user_role}")
-
-#         # Vérification du rôle pour autoriser l'action
-#         if user_role not in ['technicien']:  # Ajoutez les rôles autorisés ici
-#             dispatcher.utter_message(text="Désolé, vous n'avez pas le droit d'accès à ces informations.")
-#             return []
-
-#         try:
-#             # Connexion à la base de données
-#             conn = create_connection()
-
-#             if conn:
-#                 cursor = conn.cursor()
-
-#                 # Extraction des entités depuis le tracker
-#                 numero_demande = next(tracker.get_latest_entity_values('numero_demande'), None)
-#                 demande_achat = next(tracker.get_latest_entity_values('demande_achat'), None)
-#                 type_information = next(tracker.get_latest_entity_values('type_information'), None)
-
-#                 # Vérification des entités pertinentes
-#                 if demande_achat in ["demandes d'achat", "demande d'achat", "DA"] and type_information in ["fournisseur", "prestataire"]:
-#                     if numero_demande:
-#                         # Requête SQL pour récupérer le fournisseur de la demande spécifiée
-#                         sql_query = f"""
-#                             SELECT s.supplier_designation
-#                             FROM purchase_requisition pr
-#                             LEFT JOIN supplier s ON pr.purchase_requisition_supplier_id = s.supplier_id
-#                             WHERE pr.purchase_requisition_number = '{numero_demande}'
-#                             """
-
-#                         # Exécution de la requête SQL
-#                         cursor.execute(sql_query)
-#                         fournisseur = cursor.fetchone()
-
-#                         if fournisseur:
-#                             supplier_designation = fournisseur[0]
-#                             response = f"Le fournisseur pour la demande d'achat numéro {numero_demande} est {supplier_designation}."
-#                             dispatcher.utter_message(text=response)
-#                         else:
-#                             dispatcher.utter_message(text=f"Aucune information trouvée pour le fournisseur de la demande d'achat numéro {numero_demande}.")
-#                     else:
-#                         dispatcher.utter_message(text="Le numéro de demande spécifié est invalide ou manquant.")
-#                 else:
-#                     dispatcher.utter_message(text="Je ne comprends pas votre demande, veuillez reformuler votre question.")
-
-#                 cursor.close()
-#                 conn.close()
-
-#             else:
-#                 dispatcher.utter_message(text="Problème de connexion à la base de données.")
-
-#         except mysql.connector.Error as e:
-#             print(f"Erreur MySQL : {e}")
-#             dispatcher.utter_message(text="Erreur MySQL lors de la récupération des informations depuis la base de données.")
-
-#         except Exception as e:
-#             print(f"Erreur : {e}")
-#             dispatcher.utter_message(text="Erreur lors de la récupération des informations depuis la base de données.")
-
-#         return []
+        # # Vérification du rôle pour autoriser l'action
+        # if user_role not in ['technicien', 'Magasinier', 'Responsable Achat']:  # Ajoutez les rôles autorisés ici
+        #     dispatcher.utter_message(text="Désolé, vous n'avez pas le droit d'accès à ces informations.")
+        #     return []
 
 
-#ok
-# class ActionDemandeAchatFournisseur(Action):
-#     def name(self) -> Text:
-#         return "action_demander_fournisseur_demande_achat"
+class ActionDemandeAchatFournisseur(Action):
+    def name(self) -> Text:
+        return "action_demander_fournisseur_demande_achat"
 
-#     def run(self, dispatcher: CollectingDispatcher,
-#             tracker: Tracker,
-#             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
 
-#         try:
-#             # Connexion à la base de données
-#             conn = create_connection()
+        user_id = 17 # ID de l'utilisateur pour l'exemple
 
-#             if conn:
-#                 cursor = conn.cursor()
+        try:
+            # Connexion à la base de données
+            conn = create_connection()
 
-#                 # Extraction de l'entité 'numero_demande' depuis le tracker
-#                 numero_demande = next(tracker.get_latest_entity_values('numero_demande'), None)
-#                 demande_achat = next(tracker.get_latest_entity_values('demande_achat'), None)
-#                 type_information = next(tracker.get_latest_entity_values('type_information'), None)
+            if conn:
+                cursor = conn.cursor()
 
-#                 if demande_achat in ["demandes d'achat", "demande d'achat", "DA"] and type_information in ["fournisseur", "prestataire"]:
-#                     if numero_demande:
-#                         # Requête SQL pour récupérer le fournisseur de la demande spécifiée
-#                         sql_query = f"""
-#                             SELECT s.supplier_designation
-#                             FROM purchase_requisition pr
-#                             LEFT JOIN supplier s ON pr.purchase_requisition_supplier_id = s.supplier_id
-#                             WHERE pr.purchase_requisition_number = '{numero_demande}'
-#                             """
+                # Requête SQL pour récupérer user_profile_id
+                sql_query = f"""
+                    SELECT up.user_profile_id
+                    FROM user u
+                    JOIN user_company uc ON u.user_id = uc.user_company_user_id
+                    JOIN user_profile up ON uc.user_company_profile_id = up.user_profile_id
+                    WHERE u.user_id = {user_id}
+                """
+                cursor.execute(sql_query)
+                row = cursor.fetchone()
 
-#                         # Exécution de la requête SQL
-#                         cursor.execute(sql_query)
-#                         fournisseur = cursor.fetchone()
+                if row:
+                    user_profile_id = row[0]
 
-#                         if fournisseur:
-#                             supplier_designation = fournisseur[0]
-#                             response = f"Le fournisseur pour la demande d'achat numéro {numero_demande} est {supplier_designation}."
-#                             dispatcher.utter_message(text=response)
-#                         else:
-#                             dispatcher.utter_message(text=f"Aucune information trouvée pour le fournisseur de la demande d'achat numéro {numero_demande}.")
-#                     else:
-#                         dispatcher.utter_message(text="Le numéro de demande spécifié est invalide ou manquant.")
+                    # Vérification si l'utilisateur a le bon profil
+                    if user_profile_id != 8:
+                        dispatcher.utter_message(text="Désolé, votre profil ne vous permet pas d'avoir accès à ces informations")
+                        return []
+                else:
+                    dispatcher.utter_message(text="Utilisateur non trouvé.")
+                    return []
 
-#                     cursor.close()
-#                     conn.close()
-#                 else:
-#                     dispatcher.utter_message(text="Je n'arrive pas comprendre ce que vous dites, verifiez bien votre question.")
+                # Extraction des entités depuis le tracker
+                numero_demande = next(tracker.get_latest_entity_values('numero_demande'), None)
+                demande_achat = next(tracker.get_latest_entity_values('demande_achat'), None)
+                type_information = next(tracker.get_latest_entity_values('type_information'), None)
 
-#             else:
-#                 dispatcher.utter_message(text="Problème de connexion à la base de données.")
+                # Vérification des entités pertinentes
+                if demande_achat in ["demandes d'achat", "demande d'achat", "DA"] and type_information in ["fournisseur", "prestataire"]:
+                    if numero_demande:
+                        # Requête SQL pour récupérer le fournisseur de la demande spécifiée
+                        sql_query = f"""
+                            SELECT s.supplier_designation
+                            FROM purchase_requisition pr
+                            LEFT JOIN supplier s ON pr.purchase_requisition_supplier_id = s.supplier_id
+                            WHERE pr.purchase_requisition_number = '{numero_demande}'
+                        """
+                        cursor.execute(sql_query)
+                        fournisseur = cursor.fetchone()
 
-#         except mysql.connector.Error as e:
-#             print(f"Erreur MySQL : {e}")
-#             dispatcher.utter_message(text="Erreur MySQL lors de la récupération des informations depuis la base de données.")
+                        if fournisseur:
+                            supplier_designation = fournisseur[0]
+                            response = f"Le fournisseur pour la demande d'achat numéro {numero_demande} est {supplier_designation}."
+                            dispatcher.utter_message(text=response)
+                        else:
+                            dispatcher.utter_message(text=f"Aucune information trouvée pour le fournisseur de la demande d'achat numéro {numero_demande}.")
+                    else:
+                        dispatcher.utter_message(text="Le numéro de demande spécifié est invalide ou manquant.")
+                else:
+                    dispatcher.utter_message(text="Je ne comprends pas votre demande, veuillez reformuler votre question.")
 
-#         except Exception as e:
-#             print(f"Erreur : {e}")
-#             dispatcher.utter_message(text="Erreur lors de la récupération des informations depuis la base de données.")
+                cursor.close()
+                conn.close()
 
-#         return []
+            else:
+                dispatcher.utter_message(text="Problème de connexion à la base de données.")
 
+        except mysql.connector.Error as e:
+            print(f"Erreur MySQL : {e}")
+            dispatcher.utter_message(text="Erreur MySQL lors de la récupération des informations depuis la base de données.")
+
+        except Exception as e:
+            print(f"Erreur : {e}")
+            dispatcher.utter_message(text="Erreur lors de la récupération des informations depuis la base de données.")
+
+        return []
 
 #pas ok
 class ActionDemandeAchatDelaiLivraison(Action):
@@ -161,6 +109,7 @@ class ActionDemandeAchatDelaiLivraison(Action):
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
 
+        user_id = 17
         try:
             # Connexion à la base de données
             conn = create_connection()
@@ -168,6 +117,24 @@ class ActionDemandeAchatDelaiLivraison(Action):
             if conn:
                 cursor = conn.cursor()
 
+                # Requête SQL pour récupérer user_profile_id
+                sql_query = f"""
+                    SELECT up.user_profile_id
+                    FROM user u
+                    JOIN user_company uc ON u.user_id = uc.user_company_user_id
+                    JOIN user_profile up ON uc.user_company_profile_id = up.user_profile_id
+                    WHERE u.user_id = {user_id}
+                """
+                cursor.execute(sql_query)
+                row = cursor.fetchone()
+
+                if row:
+                    user_profile_id = row[0]
+
+                    # Vérification si l'utilisateur a le bon profil
+                    if user_profile_id != 8:
+                        dispatcher.utter_message(text="Désolé, votre profil ne vous permet pas d'avoir accès à ces informations")
+                        return []
                 # Extraction de l'entité 'numero_demande' depuis le tracker
                 numero_demande = next(tracker.get_latest_entity_values('numero_demande'), None)
                 type_information = next(tracker.get_latest_entity_values('type_information'), None)
@@ -214,7 +181,6 @@ class ActionDemandeAchatDelaiLivraison(Action):
 
         return []
 
-
 #ok
 class ActionDemandeAchatSituation(Action):
     def name(self) -> Text:
@@ -224,6 +190,8 @@ class ActionDemandeAchatSituation(Action):
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
 
+        user_id = 17
+
         try:
             # Connexion à la base de données
             conn = create_connection()
@@ -231,6 +199,24 @@ class ActionDemandeAchatSituation(Action):
             if conn:
                 cursor = conn.cursor()
 
+                # Requête SQL pour récupérer user_profile_id
+                sql_query = f"""
+                    SELECT up.user_profile_id
+                    FROM user u
+                    JOIN user_company uc ON u.user_id = uc.user_company_user_id
+                    JOIN user_profile up ON uc.user_company_profile_id = up.user_profile_id
+                    WHERE u.user_id = {user_id}
+                """
+                cursor.execute(sql_query)
+                row = cursor.fetchone()
+
+                if row:
+                    user_profile_id = row[0]
+
+                    # Vérification si l'utilisateur a le bon profil
+                    if user_profile_id != 8:
+                        dispatcher.utter_message(text="Désolé, votre profil ne vous permet pas d'avoir accès à ces informations")
+                        return []
                 # Extraction de l'entité 'numero_demande' depuis le tracker
                 numero_demande = next(tracker.get_latest_entity_values('numero_demande'), None)
                 type_information = next(tracker.get_latest_entity_values('type_information'), None)
@@ -285,6 +271,10 @@ class ActionDemandesAchatPeriodeLivraison(Action):
     def run(self, dispatcher: CollectingDispatcher,
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+
+        user_id = 17
+
+
         try:
             # Connexion à la base de données
             conn = create_connection()
@@ -292,6 +282,24 @@ class ActionDemandesAchatPeriodeLivraison(Action):
             if conn:
                 cursor = conn.cursor()
 
+                # Requête SQL pour récupérer user_profile_id
+                sql_query = f"""
+                    SELECT up.user_profile_id
+                    FROM user u
+                    JOIN user_company uc ON u.user_id = uc.user_company_user_id
+                    JOIN user_profile up ON uc.user_company_profile_id = up.user_profile_id
+                    WHERE u.user_id = {user_id}
+                """
+                cursor.execute(sql_query)
+                row = cursor.fetchone()
+
+                if row:
+                    user_profile_id = row[0]
+
+                    # Vérification si l'utilisateur a le bon profil
+                    if user_profile_id != 8:
+                        dispatcher.utter_message(text="Désolé, votre profil ne vous permet pas d'avoir accès à ces informations")
+                        return []
                 # Extraction des entités 'type_information' et 'periode_livraison' depuis le tracker
                 type_information = next(tracker.get_latest_entity_values('demande_achat'), None)
                 periode_livraison = next(tracker.get_latest_entity_values('periode_livraison'), None)
@@ -393,7 +401,7 @@ class ActionDemandesAchatPeriodeLivraison(Action):
             else:
                 dispatcher.utter_message(text="Problème de connexion à la base de données.")
 
-        except Error as e:
+        except mysql.connector.Error as e:
             print(f"Erreur MySQL : {e}")
             dispatcher.utter_message(text="Erreur MySQL lors de la récupération des informations depuis la base de données.")
 
@@ -403,4 +411,273 @@ class ActionDemandesAchatPeriodeLivraison(Action):
 
         return []
 
+
+class ActionBonsCommandePeriodeLivraison(Action):
+    def name(self) -> Text:
+        return "action_bons_commande_periode_livraison"
+
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+
+        user_id = 17
+
+        try:
+            # Connexion à la base de données
+            conn = create_connection()
+
+            if conn:
+                cursor = conn.cursor()
+
+
+                # Requête SQL pour récupérer user_profile_id
+                sql_query = f"""
+                    SELECT up.user_profile_id
+                    FROM user u
+                    JOIN user_company uc ON u.user_id = uc.user_company_user_id
+                    JOIN user_profile up ON uc.user_company_profile_id = up.user_profile_id
+                    WHERE u.user_id = {user_id}
+                """
+                cursor.execute(sql_query)
+                row = cursor.fetchone()
+
+                if row:
+                    user_profile_id = row[0]
+
+                    # Vérification si l'utilisateur a le bon profil
+                    if user_profile_id != 8:
+                        dispatcher.utter_message(text="Désolé, votre profil ne vous permet pas d'avoir accès à ces informations")
+                        return []
+                # Extraction des entités 'type_information' et 'periode_livraison' depuis le tracker
+                type_information = next(tracker.get_latest_entity_values("type_information"), None)
+                periode_entite = next(tracker.get_latest_entity_values("periode_livraison"), None)
+
+                print(type_information)
+                print(periode_entite)
+
+                if periode_entite  and type_information in ["bons de commande", "commandes"]:
+                    # Définir la condition de la période
+                    periode_condition = ""
+                    if periode_entite == "aujourd'hui":
+                        periode_condition = "DATE(stock_order_delivery_date) = CURDATE()"
+                    elif periode_entite == "cette semaine":
+                        periode_condition = "YEARWEEK(stock_order_delivery_date, 1) = YEARWEEK(CURDATE(), 1)"
+                    elif periode_entite == "semaine prochaine":
+                        periode_condition = "YEARWEEK(stock_order_delivery_date, 1) = YEARWEEK(DATE_ADD(CURDATE(), INTERVAL 1 WEEK), 1)"
+                    elif periode_entite == "ce mois":
+                        periode_condition = "MONTH(stock_order_delivery_date) = MONTH(CURDATE())"
+                    elif periode_entite == "mois prochain":
+                        periode_condition = "MONTH(stock_order_delivery_date) = MONTH(DATE_ADD(CURDATE(), INTERVAL 1 MONTH))"
+                    else:
+                        dispatcher.utter_message(text=f"La période '{periode_entite}' n'est pas reconnue pour le moment.")
+                        return []
+
+                    # Requête SQL pour récupérer les bons de commande dans la période spécifiée
+                    sql_query = f"""
+                        SELECT stock_order_number, stock_order_ref, stock_order_date, stock_order_delivery_date, stock_order_requester
+                        FROM stock_order
+                        WHERE {periode_condition}
+                    """
+                    cursor.execute(sql_query)
+                    commandes = cursor.fetchall()
+
+                    if commandes:
+                        message = f"""
+                        <style>
+                            h3 {{
+                                font-size: 18px;
+                            }}
+                            table {{
+                                border-collapse: collapse;
+                                width: 100%;
+                            }}
+                            th, td {{
+                                border: 1px solid black;
+                                padding: 8px;
+                                text-align: left;
+                            }}
+                            th {{
+                                background-color: white;
+                                color: navy;
+                            }}
+                        </style>
+                        <h3>Bons de commande pour '{periode_entite}'</h3>
+                        <table>
+                            <tr>
+                                <th>Numéro</th>
+                                <th>Référence</th>
+                                <th>Date de commande</th>
+                                <th>Date de livraison</th>
+                                <th>Demandeur</th>
+                            </tr>
+                        """
+
+                        for commande in commandes:
+                            stock_order_number = commande[0]
+                            stock_order_ref = commande[1]
+                            stock_order_date = commande[2]
+                            stock_order_delivery_date = commande[3]
+                            stock_order_requester = commande[4]
+
+                            message += f"""
+                            <tr>
+                                <td>{stock_order_number}</td>
+                                <td>{stock_order_ref}</td>
+                                <td>{stock_order_date}</td>
+                                <td>{stock_order_delivery_date}</td>
+                                <td>{stock_order_requester}</td>
+                            </tr>
+                            """
+                        message += "</table>"
+                        dispatcher.utter_message(text=message, parse_mode="HTML")
+
+                    else:
+                        dispatcher.utter_message(text=f"Aucun bon de commande trouvé pour '{periode_entite}'.")
+
+                else:
+                    dispatcher.utter_message(text="Les informations nécessaires pour la requête sont incomplètes ou incorrectes.")
+
+                cursor.close()
+                conn.close()
+
+            else:
+                dispatcher.utter_message(text="Problème de connexion à la base de données.")
+
+        except mysql.connector.Error as e:
+            print(f"Erreur MySQL : {e}")
+            dispatcher.utter_message(text="Erreur MySQL lors de la récupération des informations depuis la base de données.")
+
+        except Exception as e:
+            print(f"Erreur : {e}")
+            dispatcher.utter_message(text="Erreur lors de la récupération des informations depuis la base de données.")
+
+        return []
+
+class ActionSavoirCommandesRetardLivraison(Action):
+    def name(self) -> Text:
+        return "action_savoir_commandes_retard_livraison"
+
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+
+        user_id = 17
+        type_information = next(tracker.get_latest_entity_values('type_information'), None)
+        print(type_information)
+        if type_information in ["bons de commandes", "commandes", "bons de commande"]:
+            try:
+                # Connexion à la base de données
+                conn = create_connection()
+
+                if conn:
+                    cursor = conn.cursor()
+                    # Requête SQL pour obtenir le user_profile_id
+                    sql_query = f"""
+                        SELECT up.user_profile_id
+                        FROM user u
+                        JOIN user_company uc ON u.user_id = uc.user_company_user_id
+                        JOIN user_profile up ON uc.user_company_profile_id = up.user_profile_id
+                        WHERE u.user_id = {user_id}
+                    """
+                    cursor.execute(sql_query)
+                    row = cursor.fetchone()
+
+                    if row:
+                        user_profile_id = row[0]
+
+                        # Vérification si l'utilisateur a le bon profil
+                        if user_profile_id != 8:
+                            dispatcher.utter_message(text="Désolé, votre profil ne vous permet pas d'avoir accès à ces informations.")
+                            return []
+
+                    # Requête SQL pour récupérer les commandes en retard de livraison
+                    sql_query = """
+                        SELECT
+                            stock_order_number,
+                            stock_order_ref,
+                            stock_order_date,
+                            stock_order_delivery_date,
+                            stock_order_requester
+                        FROM
+                            stock_order
+                        WHERE
+                            stock_order_delivery_date < CURDATE()
+                            AND stock_order_situation_id != 7
+                    """
+
+                    # Exécution de la requête SQL
+                    cursor.execute(sql_query)
+                    commandes_retard = cursor.fetchall()
+
+                    if commandes_retard:
+                        message = """
+                        <style>
+                            h3 {
+                                font-size: 18px;
+                            }
+                            table {
+                                border-collapse: collapse;
+                                width: 100%;
+                            }
+                            th, td {
+                                border: 1px solid black;
+                                padding: 8px;
+                                text-align: left;
+                            }
+                            th {
+                                background-color: white;
+                                color: navy;
+                            }
+                        </style>
+                        <h3>Commandes en retard de livraison</h3>
+                        <table>
+                            <tr>
+                                <th>Numéro de commande</th>
+                                <th>Référence</th>
+                                <th>Date de commande</th>
+                                <th>Date de livraison prévue</th>
+                                <th>Demandeur</th>
+                            </tr>
+                        """
+
+                        for commande in commandes_retard:
+                            stock_order_number = commande[0]
+                            stock_order_ref = commande[1]
+                            stock_order_date = commande[2]
+                            stock_order_delivery_date = commande[3]
+                            stock_order_requester = commande[4]
+
+                            message += f"""
+                            <tr>
+                                <td>{stock_order_number}</td>
+                                <td>{stock_order_ref}</td>
+                                <td>{stock_order_date}</td>
+                                <td>{stock_order_delivery_date}</td>
+                                <td>{stock_order_requester}</td>
+                            </tr>
+                            """
+                        message += "</table>"
+                        dispatcher.utter_message(text=message, parse_mode="HTML")
+
+                    else:
+                        dispatcher.utter_message(text="Aucune commande en retard de livraison.")
+
+                    cursor.close()
+                    conn.close()
+
+                else:
+                    dispatcher.utter_message(text="Problème de connexion à la base de données.")
+
+            except mysql.connector.Error as e:
+                print(f"Erreur MySQL : {e}")
+                dispatcher.utter_message(text="Erreur MySQL lors de la récupération des informations depuis la base de données.")
+
+            except Exception as e:
+                print(f"Erreur : {e}")
+                dispatcher.utter_message(text="Erreur lors de la récupération des informations depuis la base de données.")
+            return []
+
+        else:
+            dispatcher.utter_message(text="Les expressions prises en charge sont 'bons de commande' ou 'commandes'.")
+            return []
 

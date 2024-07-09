@@ -98,25 +98,6 @@ class ActionSavoirDemandeDeSortieValidee(Action):
 
         return []
 
-
-#Savoir les bons de commande en retard
-class ActionSavoirCommandesRetardLivraison(Action):
-
-    def name(self) -> Text:
-        return "action_savoir_commandes_retard_livraison"
-
-    def run(self, dispatcher: CollectingDispatcher,
-            tracker: Tracker,
-            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
-
-        # As this is a static response action, we provide a static message.
-        dispatcher.utter_message(text="Voici la liste des commandes en retard de livraison: C001, C002, C003.")
-
-        return []
-
-
-
-
 #************************************************************************************************
 
 class ActionEtatEquipementComposantes(Action):
