@@ -1,4 +1,6 @@
+To ensure that the table of contents (TOC) links correctly to the respective sections in your Markdown document, you need to make sure that the section headings and the links in the TOC match perfectly. Markdown automatically creates IDs for headers by converting them to lowercase and replacing spaces with hyphens. Special characters are often omitted.
 
+Here’s an example of a correctly formatted TOC with links:
 
 ```markdown
 # Rasa NLU Project
