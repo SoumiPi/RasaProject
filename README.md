@@ -59,8 +59,6 @@ Before you begin, ensure you have met the following requirements:
    rasa init
    ```
 
-   This command will create a new project structure with default files and provide an option to train the initial model and test the bot.
-
 ## Project Structure
 
 The project is organized as follows:
@@ -161,4 +159,4 @@ Guidelines for contributing to the project can be provided here, including how t
 Specify the project's licensing information here, including any open-source licenses used.
 ```
 
-Ensure that the Markdown renderer you are using supports anchor links and correctly interprets the `#` syntax for internal links.
+In this format, clicking on an item in the TOC will navigate you to the corresponding section in the document. Make sure that the Markdown processor you use supports this functionality. If you encounter any issues, check that the section headings exactly match the links in the TOC, including capitalization and special characters.
