@@ -48,7 +48,10 @@ The project is organized as follows:
 ```plaintext
 yourproject/
 ├── actions/
-│   └── actions.py
+│  ├── actions_stock.py
+│  ├── actions_achats.py
+│  ├── actions_equip_transfer.py
+│  └── actions_interventions.py
 ├── data/
 │   ├── nlu.yml
 │   ├── stories.yml
@@ -61,6 +64,12 @@ yourproject/
 ├── endpoints.yml
 ├── README.md
 └── domain.yml
+└── app.py
+└── static/
+    ├──  script.js
+    ├──  styles.css
+    └── table_style.css
+
 ```
 
 - **actions/**: Contains custom action implementations.
@@ -134,35 +143,5 @@ Specify the project's licensing information here, including any open-source lice
 
 ```
 
-### CSS Example for Styling
-
-If you want to include CSS for styling, you can either include it in a separate CSS file or within a `<style>` tag if using HTML:
-
-```html
-<style>
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
-    color: #333;
-}
-
-h1, h2, h3, h4, h5, h6 {
-    color: #2c3e50;
-}
-
-pre, code {
-    background-color: #f8f8f8;
-    border: 1px solid #e1e1e8;
-    border-radius: 4px;
-    padding: 5px;
-    font-size: 1em;
-    color: #333;
-}
-
-pre {
-    overflow-x: auto;
-}
-</style>
-```
 
 This CSS provides a basic style for the documentation, making it easier to read and visually appealing. If you are using a Markdown viewer that supports HTML and CSS, you can include this style directly; otherwise, include it in the relevant HTML files if generating documentation from Markdown.
