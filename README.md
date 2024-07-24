@@ -1,6 +1,6 @@
-To ensure that the table of contents (TOC) links correctly to the respective sections in your Markdown document, you need to make sure that the section headings and the links in the TOC match perfectly. Markdown automatically creates IDs for headers by converting them to lowercase and replacing spaces with hyphens. Special characters are often omitted.
+To ensure that the table of contents (TOC) links work correctly, the anchor tags must match exactly with the section headers in the Markdown document. The headers are automatically converted to IDs by converting them to lowercase, replacing spaces with hyphens, and removing special characters.
 
-Here’s an example of a correctly formatted TOC with links:
+Here's the corrected and rigorous format:
 
 ```markdown
 # Rasa NLU Project
@@ -161,4 +161,4 @@ Guidelines for contributing to the project can be provided here, including how t
 Specify the project's licensing information here, including any open-source licenses used.
 ```
 
-In this format, clicking on an item in the TOC will navigate you to the corresponding section in the document. Make sure that the Markdown processor you use supports this functionality. If you encounter any issues, check that the section headings exactly match the links in the TOC, including capitalization and special characters.
+In this format, the Table of Contents (TOC) should link directly to the respective sections when clicked. The header IDs in the TOC (like `#prerequisites`) must exactly match the generated IDs from the section headings. If you continue to experience issues, it could be related to the specific Markdown renderer or viewer you are using. Some renderers might handle links differently, especially if there are special characters or casing differences.
