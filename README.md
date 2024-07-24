@@ -1,8 +1,4 @@
-To ensure that the table of contents (TOC) links work correctly, the anchor tags must match exactly with the section headers in the Markdown document. The headers are automatically converted to IDs by converting them to lowercase, replacing spaces with hyphens, and removing special characters.
 
-Here's the corrected and rigorous format:
-
-```markdown
 # Rasa NLU Project
 
 This project uses Rasa NLU for building conversational AI. Rasa NLU provides the natural language understanding (NLU) component of the system, enabling it to understand user inputs.
