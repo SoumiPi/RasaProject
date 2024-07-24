@@ -66,8 +66,8 @@ yourproject/
 └── domain.yml
 └── app.py
 └── static/
-    ├──  script.js
-    ├──  styles.css
+    ├── script.js
+    ├── styles.css
     └── table_style.css
 
 ```
