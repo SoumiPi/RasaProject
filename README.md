@@ -1,6 +1,4 @@
-Pour ajouter des couleurs et des styles à votre documentation, vous pouvez utiliser du CSS pour mettre en évidence les sections de code et d'autres éléments. Vous pouvez inclure le CSS directement dans un fichier Markdown si votre plateforme de documentation le supporte, ou dans un fichier HTML.
-
-Voici un exemple de documentation avec des commandes formatées et des styles CSS de base :
+Pour une documentation simplifiée, voici les étapes pour installer Rasa et initialiser un projet Rasa sans inclure les configurations MySQL :
 
 ```markdown
 # Rasa NLU Project
@@ -30,16 +28,38 @@ Before you begin, ensure you have met the following requirements:
 
 ## Installation
 
+### Set Up a Virtual Environment
+
 1. **Create a virtual environment:**
    ```bash
    python -m venv venv
-   source venv/bin/activate  # On Windows, use `venv\Scripts\activate`
    ```
 
-2. **Install the required packages:**
+2. **Activate the virtual environment:**
+   - On Windows:
+     ```bash
+     venv\Scripts\activate
+     ```
+   - On Unix or MacOS:
+     ```bash
+     source venv/bin/activate
+     ```
+
+### Install Rasa
+
+3. **Install Rasa and its dependencies:**
    ```bash
    pip install rasa
    ```
+
+### Initialize a Rasa Project
+
+4. **Initialize a new Rasa project:**
+   ```bash
+   rasa init
+   ```
+
+   This command will create a new project structure with default files and provide an option to train the initial model and test the bot.
 
 ## Project Structure
 
@@ -63,13 +83,12 @@ yourproject/
 ├── credentials.yml
 ├── endpoints.yml
 ├── README.md
-└── domain.yml
-└── app.py
+├── domain.yml
+├── app.py
 └── static/
     ├── script.js
     ├── styles.css
     └── table_style.css
-
 ```
 
 - **actions/**: Contains custom action implementations.
@@ -140,8 +159,6 @@ Guidelines for contributing to the project can be provided here, including how t
 ## License
 
 Specify the project's licensing information here, including any open-source licenses used.
-
 ```
 
-
-This CSS provides a basic style for the documentation, making it easier to read and visually appealing. If you are using a Markdown viewer that supports HTML and CSS, you can include this style directly; otherwise, include it in the relevant HTML files if generating documentation from Markdown.
+This revised documentation provides clear instructions for installing Rasa and initializing a project, along with a streamlined explanation of the project's structure and other key sections. The focus is on making it easy for users to set up and start working with Rasa without additional complexities.
