@@ -1,4 +1,4 @@
-Pour une documentation simplifiée, voici les étapes pour installer Rasa et initialiser un projet Rasa sans inclure les configurations MySQL :
+
 
 ```markdown
 # Rasa NLU Project
@@ -161,4 +161,4 @@ Guidelines for contributing to the project can be provided here, including how t
 Specify the project's licensing information here, including any open-source licenses used.
 ```
 
-This revised documentation provides clear instructions for installing Rasa and initializing a project, along with a streamlined explanation of the project's structure and other key sections. The focus is on making it easy for users to set up and start working with Rasa without additional complexities.
+Ensure that the Markdown renderer you are using supports anchor links and correctly interprets the `#` syntax for internal links.
