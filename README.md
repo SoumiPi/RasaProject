@@ -154,7 +154,4 @@ Guidelines for contributing to the project can be provided here, including how t
 
 ## License
 
-Specify the project's licensing information here, including any open-source licenses used.
-```
-
-In this format, the Table of Contents (TOC) should link directly to the respective sections when clicked. The header IDs in the TOC (like `#prerequisites`) must exactly match the generated IDs from the section headings. If you continue to experience issues, it could be related to the specific Markdown renderer or viewer you are using. Some renderers might handle links differently, especially if there are special characters or casing differences.
+-----coming
